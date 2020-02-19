@@ -1,4 +1,4 @@
-app = "hellofly"
+app = "lyst"
 
 [[services]]
   concurrency = "20,25"
