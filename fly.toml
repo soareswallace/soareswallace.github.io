@@ -1,0 +1,18 @@
+app = "hellofly"
+
+[[services]]
+  concurrency = "20,25"
+  internal_port = 8080
+  protocol = "tcp"
+
+  [services.port]
+
+    [services.port.443]
+      handlers = ["tls","http"]
+
+    [services.port.80]
+      handlers = ["http"]
+
+  [[services.tcp_check]]
+    interval = 10000
+    timeout = 2000
