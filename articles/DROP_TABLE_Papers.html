@@ -1,0 +1,54 @@
+<html>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+	<style>
+		body {
+			max-width: 50em;
+			margin: 0 auto;
+			color: white;
+			background: black;
+		}
+		pre {
+			white-space: pre-wrap;
+		}
+		@media only screen and (max-width:768px) {
+			body {
+				max-width:100%;
+			}
+		}
+		a:link {
+			color: #0a0 ;
+		}
+		a:visited {
+			color: #004100 ;
+		}
+	</style>
+	<title>PFS</title>
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<body>
+		<h1>Why Don’t Developers Detect Improper Input Validation? ’; DROP TABLE Papers; --</h1>
+		<hr>
+		<div>
+			In general, as the author defindes, a software vulnerability is a design flaw or an implmentation bug that allows an attacker to cause harm to the stakeholders of an application. There are several ways to prevent this situations: code reviews, scripts to attack most common flaws, submit to a bug bounty program, penetrarion tests. The list is endless. One of the most vulnerability founded over the years is Improper Input Validation (IIV). Is dangerous because it doesn´t require a highly skilled programmer to found. This vuln is basically trying to bypass validation, if existing, or input a data that it was not supposed to be handled. For example make an exchange between accounts with a negative number. Instead of transfering money, you are inducing the server to send you money from the other account. 
+			<br>
+			<br>
+			But why can´t developers, with years of experience, spot these type of vuln? Most of the researchs made until this article was published concluded that there is gap between development and secure development. There are misconcepts made, the developers rely to much to the frameworks underlying the applications and transfer the responsability to them. So, basically, development and secure development are very different. Altough they also concluded that code reviews helps to mitigate this issue. Well, in most of the Open-Source Projects. However, secure-driven code review isn't that effective. Aproximately 1% of vulnerabilities were in fact prevented - using Chromium Project as an examples - by secure-driven reviews.
+			<br>
+			<br>
+			<img src="images/drop1.png" alt="https://arxiv.org/abs/2102.06251" width="800" height="181">
+			<br>
+			<br>
+			<h2>How the research was performed?</h2>
+			<br>
+			<br>
+			Basically there were two main questions, called Research Questions:
+			<ul>
+				<li>To what extent do developers detect IIV vulnerabilities during code review?</li>
+				<li>What is the effect of the visibility of a traditional attack scenario for an IIV vulnerability on its detection during code review?</li>
+			</ul>
+			In particular the second one was leaded from the hypothesis: The visibility of a traditional attack scenario for an IIV vulnerability does not affect its detection during code review. Also Woon and Kankanhali on "Investigation of is professionals’intention to practise secure development of applications"
+        </div>
+		<hr>
+		This article is only a summary what is in this <a href="https://arxiv.org/abs/2102.06251">article</a>.
+        </body>
+</html>
