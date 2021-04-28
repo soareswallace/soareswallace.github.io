@@ -37,16 +37,37 @@
 			<br>
 			<img src="images/drop1.png" alt="https://arxiv.org/abs/2102.06251" width="800" height="181">
 			<br>
-			<br>
 			<h2>How the research was performed?</h2>
-			<br>
-			<br>
 			Basically there were two main questions, called Research Questions:
 			<ul>
 				<li>To what extent do developers detect IIV vulnerabilities during code review?</li>
 				<li>What is the effect of the visibility of a traditional attack scenario for an IIV vulnerability on its detection during code review?</li>
 			</ul>
-			In particular the second one was leaded from the hypothesis: The visibility of a traditional attack scenario for an IIV vulnerability does not affect its detection during code review. Also Woon and Kankanhali on "Investigation of is professionals’intention to practise secure development of applications"
+			In particular the second one was leaded from the hypothesis: The visibility of a traditional attack scenario for an IIV vulnerability does not affect its detection during code review. Also Woon and Kankanhali on "Investigation of is professionals’intention to practise secure development of applications" argue that developers may not pay attention to the vulnerabilities because it is not their normal role. To evaluate how this may effect developers and based on studies by Naiakshina the researches prompt the voluntiers about the existence of a vulnerability. Particularly the ones who missed the bug. From this scenario the researches intuitively create another question: 
+			<ul>
+				<li>What is the effect of warning developers who missed the IIV about the existence of a vulnerability (i.e. prompting) on the detection of an IIV?</li>
+			</ul>
+			Leading to another hypothesis: Prompting does not affect the detection of an IIV vulnerability during code review.
+
+			<h2>The test</h2>
+			The tests performed were pretty simple. It was basically a GUI, like GitHub, and the volunteers had to evaluate the code. However no information was given prior to the volunteers related to the security vulnerability to not give any clues about the test. The next phase was ask questions about vulnerabilties knwoledge & pratices. Right after the system show that there is a vuln in the code - for those who didn´t found - and there is an optional choice to whether the user wants to go back or go on.
+
+			<h2>What was show to the developers?</h2>
+			There were two types of vulnerabilites show to the developers: SQLi - SQL Injection and Improper Input Validation. Alongside these two a control bug was also showed to be the varibale of control. This bug was introduced to perform the evaluation on the interest of the participants. If the participants who didn't catch the vulnerability also didn't find the control bug it shows to the researches that this user wasn't engaged to the task.
+
+			<h2>Results</h2>
+			A total of 472 people accessed the page, but only 146 wen beyond the page that were considered for the results. From these 80 received the SQLi vuln and 66 received the IVQI. The majority of the participants were software developers (57%) with multiple years of experience. In summary the results for the first review were as it is described below:
+
+			<ul>
+				<li>66 found the vulnerability. This includes both SQLi and IVQI.</li>
+				<li>80 didn't found any the vulnerability</li>
+			</ul>
+			<br>
+			<br>
+			<img src="images/drop2.png" alt="https://arxiv.org/abs/2102.06251" width="516" height="408">
+			<br>
+			<br>
+			In particular the participants commented that SQLi was easier to find because it is a common type of attack.
         </div>
 		<hr>
 		This article is only a summary what is in this <a href="https://arxiv.org/abs/2102.06251">article</a>.
