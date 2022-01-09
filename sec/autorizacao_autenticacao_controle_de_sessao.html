@@ -32,55 +32,52 @@
 			Processos de autenticação, autorização, controle de acesso e  sessão surgem para fazer o gerenciamento dos usuários as mais diversas funções de sistemas. Entretanto existem alguns problemas que surgem a partir de implementação e suposições que acontecem durante o processo de desenvolvimento. Neste documento iremos apresentar tanto as formas de ataque como possíveis formas de prevenção.
 
 			<h2><u>Ataques força-bruta</u></h2>
-			Ataques força-bruta são um dos tipos de ataque mais simples que existem. Consistem em basicamente realizar tentativas de login múltiplas vezes com credenciais que tem potencial de acesso ao sistema. Em caso de credenciais corretas o atacante tem a conta do usuário. Estes seriam alguns tipos de situações que aplicações podem se encontrar durante estes tipos de ataques:
+			Ataques força-bruta são um dos tipos de ataque mais simples que existem para ganhar acesso privilégiado. Consistem em basicamente realizar várias tentativas de login com credenciais que tem potencial de acesso ao sistema. Em caso de as credenciais estarem corretas o atacante conseguirá acessar a conta do usuário. Pelo fato de existirem múltiplas formas de se implementar autenticação de credenciais é possível que cada sistema possua uma ou mais vulnerabilidades relacionadas. Algumas delas estão descritas abaixo.
 
-				<h3>Não há qualquer tipo de tratamento</h3>
+				<h3>Não há qualquer tipo de tratamento a tentativas incorretas de login</h3>
 
-				Em casos em que não há tratamento para estes tipos de ataques um adversário pode tentar quantas vezes quiser acessar um sistema com quaisquer credenciais sem ser impedido de qualquer forma. Casos de sucesso podem ser diferenciados de casos falhos tanto pelo código HTTP como pelo <i>Content-length</i> da resposta do servidor. Deve sempre existir algum mecanismo para evitar este tipo de ataque.
+				Em casos em que não há tratamento para estes tipos de ataques um adversário pode tentar quantas vezes quiser acessar um sistema com quaisquer credenciais sem ser impedido de qualquer forma. Casos de sucesso podem ser diferenciados de casos falhos tanto pelo código HTTP como pelo <i>Content-length</i> da resposta do servidor. Deve sempre existir algum mecanismo para evitar este tipo de situação.
 
 				<h3>Um HTTP Header é configurado a cada tentativa falha</h3>
 
-				Em casos quando o HTTP Header é configurado a cada falha no login(e.g.: <code>failedLogin=1</code>) é possivel continuar a explorar a vulnerabilidade sem qualquer impedimento apenas resetando o <i>header</i> a cada tentativa de login usando o Burp Intruder. Portanto não se deve utilizar parâmetros do HTTP Request para limitar a quantidade de tentativas de acesso.
+				Em casos quando o HTTP Header é configurado a cada falha no login(e.g.: <code>failedLogin=1</code>) é possivel continuar a explorar a vulnerabilidade sem qualquer impedimento apenas resetando o <i>header</i> a cada tentativa de login usando o <i>Burp Intruder</i>. Portanto não se deve utilizar parâmetros do HTTP <i>Request</i> para limitar a quantidade de tentativas de acesso.
 
-				<h3>Lock de contas após N tentativas de login</h3>
-				Em casos em que é lock de contas há algumas possibilidades do que pode acontecer:
+				<h3><i>Lock</i> de contas após N tentativas de login</h3>
+				Em casos em que é <i>lock</i> de contas há algumas possibilidades do que pode acontecer:
 
 				<ul>
 					<li>
-						Uma regra muito restritiva pode levar a multiplas contas lockadas se um atacante se dedicar e possuir informações sobre os usuários registrados.
+						Uma regra muito restritiva pode levar a multiplas contas lockadas se um atacante se dedicar e possuir informações sobre os usuários registrados. Isto também seria uma vulnerabildide associada ao sistema que estaria relacionada a negação de serviço como definido em <a href="https://cwe.mitre.org/data/definitions/645.html">CWE-645: Overly Restrictive Account Lockout Mechanism</a>.
 					</li>
 					<li>
-						Se o sistema possuir um lock de contas, mas validar as credenciais da mesma forma, é possível, através do tempo de resposta do servidor, supor quando as credenciais foram corretas.
+						Se o sistema possuir um lock de contas, mas validar as credenciais da mesma forma, é possível, através do tempo de resposta do servidor, supor quando as credenciais foram corretas. Portanto, em casos como estes não se deve verificar de nenhuma forma se as credenciais fornecidades são válidas. Deve-se apenas negar o acesso do usuário, ou até bloquear o IP para estes requests. Isto evita tanto enumeração de usuários registrados, como também não permite que o atacante advinhe as credenciais dos usuários registrados.
 					</li>
 				</ul>
-
-				Portanto, em casos como estes não se deve verificar de nenhuma forma se as credenciais fornecidades são válidas. Deve-se apenas negar o acesso do usuário, ou até bloquear o IP para estes requests. Isto evita tanto enumeração de usuários registrados, como também não permite que o atacante advinhe as credenciais dos usuários registrados.
-
 			<h2><u>Respostas muito verbosas</u></h2>
 
-			Muitas vezes os desenvolvedores, como forma de detalhar mais a implementação e ser consistente com o código implementado, <i>logam</i> o tipos de erros que aconteceram. Estas informações, como forma de <i>logs</i> são bastante úteis. Porém quando estas mesmas mensagens se são respondidas pelo servidor ao usuário final entregam informações valiosas que podem ser utilizadas para atacar o servidor. Portanto deve-se evitar <strong>ao máximo</strong> mensagens que dão informações sobre erros no servidor.
+			Muitas vezes os desenvolvedores, como forma de detalhar mais a implementação e ser consistente com o código implementado, <i>logam</i> o tipos de erros que aconteceram. Estas informações, em forma de <i>logs</i> são bastante úteis. Porém quando estas mesmas mensagens são respondidas pelo servidor ao usuário final entregam informações valiosas que podem ser utilizadas para atacar o servidor. Portanto deve-se evitar <strong>ao máximo</strong> mensagens que dão informações sobre erros no servidor.
 			<br>
 			<br>
-			Tipos de informações que devem ser evitadas de serem enviadas pelo servidor durante exceções:
+			Tipos de informações que devem ser evitadas de serem enviadas pelo servidor durante exceções como resposta seriam:
 
 			<ul>
 				<li>
-					Em casos de falha no login não se deve dizer o que causou a falha, como por exemplo "usuário não encontrado" ou "senha incorreta". Estas informações podem dizer se um usuário A esta cadastrado no sistema facilitando a um atacante a enumeração de usuários cadastrados.
+					Em casos de falha no login não se deve dizer o que causou a falha, como por exemplo "usuário não encontrado" ou "senha incorreta". Estas informações podem dizer se um usuário "A" esta cadastrado no sistema facilitando a um atacante a enumeração de usuários cadastrados.
 				</li>
 				<li>
-					Qualquer exceção de controle de acesso(e.g.: Usuário não pode realizar ação) deve ser tratado de forma genérica. Estas podem ser utilizadas por atacantes para entender como o sistema funciona como um todo.
+					Qualquer exceção de controle de acesso(e.g.: Somente admins podem realizar esta ação.) deve ser tratado de forma genérica. Estas exceções podem ser utilizadas por atacantes para entender como o sistema funciona em um todo.
 				</li>
 				<li>
 					Qualquer exceção não esperada, de forma geral, deve-se mostrada de forma genérica(e.g.: "Erro inesperado"). Isto evita que, por exemplo, exceções de banco exibam informações sobre o banco de dados.
 				</li>
 			</ul>
-			<h2>Senhas: possibilidades</h2>
+			<h2><u>Senhas: possibilidades</u></h2>
 
-			Senhas são as formas primárias, pelo menos até hoje, de autenticar usuários em sistemas. E junto com elas vem mecanismos de recuperação e alteração de senhas. Estes são os mecanismos mais suscetíveis a tentativas de ataques justamente por conta do quanto é possível escalar a partir do sucesso do ataque. Algumas formas de vulnerabilidade que podem ser exploradas são:
+			Senhas são as formas primárias, pelo menos até hoje, de autenticar usuários em sistemas. E junto com elas vem mecanismos de recuperação e alteração para que a conta possa se manter segura. Estes são os mecanismos mais suscetíveis a tentativas de ataques justamente por conta do quanto é possível escalar a partir do sucesso do ataque. Algumas formas de vulnerabilidade que podem ser exploradas são:
 
 			<ul>
 				<li>
-					Quando o <i>request</i> não é propriamente validado é possível manipular os parâmetros durante o <i>reset</i> de senha para que, por exemplo, a URL do <i>reset</i> seja enviado a 2 emails, o da vítima e do atacante. Por exemplo:
+					Quando o <i>request</i> não é propriamente validado é possível manipular os parâmetros durante um <i>reset</i> de senha para que, por exemplo, a URL do <i>reset</i> seja enviado a 2 emails, o da vítima e do atacante. Por exemplo:
 					<br>
 					<br>
 					<u>Request Original</u>
@@ -113,7 +110,7 @@
 					<br>
 				</li>
 				<li>
-					Da mesma forma alguns sistemas confiam nos mesmos parâmetros do HTTP Header para saber a URL que deve ser enviada para o usuário, durante o um <i>reset</i>. Portanto é possível que um atacante mude os parâmetros do request para que a URL enviada a vítima seja manipulada. Por exemplo:
+					Da mesma forma alguns sistemas confiam nos mesmos parâmetros do HTTP Header para saber a URL que deve ser enviada para o usuário, durante um <i>reset</i>. Portanto é possível que um atacante mude os parâmetros do request para que a URL enviada a vítima seja manipulada. Por exemplo:
 					<br>
 					<br>
 					<u>Request Original</u>
@@ -132,7 +129,7 @@
 					</code>
 					<br>
 					<br>
-					Dessa forma a URL enviada para o email irá iniciar com a URL <code>evil.com</code>.
+					Dessa forma a URL enviada para o email irá iniciar com <code>evil.com</code> onde pode contar códigos maliciosos para roubar o <i>token</i> de alteração de senha.
 					<br>
 					<br>
 				</li>
@@ -144,24 +141,32 @@
 					<br>
 					<br>
 					<code>
-						GET /resetPassword
+						POST /changePassword
 						<br>
 						...(HTTP Headers)
 						<br>
-
 						"user": "attackerUser"
+						<br>
+						"newPass": "pass"
+						<br>
+						"newPassAgain": "pass"
 					</code>
 					<br>
 					<br>
-					<u>Request manipulado interceptado durante um <i>reset</i> de senha com uso de um <i>proxy</i>(e.g.: Burp Suite).</u>
+					<u>Request manipulado</u>
 					<br>
 					<br>
 					<code>
-						GET /resetPassword
+						POST /changePassword
 						<br>
 						...(HTTP Headers)
 						<br>
 						"user": "victimUser"
+						<br>
+						"newPass": "pass"
+						<br>
+						"newPassAgain": "pass"
+						<br>
 					</code>
 					<br>
 					<br>
@@ -173,21 +178,19 @@
 			<h2><u>Gerenciamento de Sessões</u></h2>
 			Gerenciamento de sessões é um componente de segurança fundamental para a maioria das aplicações. Por conta de seu papel importante este componente atrai bastante olhos de atacantes. Na maioria das vezes as sessões são controladas através de cookies e tokens. Estes podem oferecer muita informação sobre os usuários e tipos de usuários da aplicação em teste. Estes tokens, em sua maioria, são codificados de alguma forma, seja base64, HEX ou até criptografados. JSON Web Tokens - JWTs - também estão sendo utilizados recentemente para controle de sessões. Exemplos de cookies e tokens de controle de sessão seriam:
 			<ul>
-				<br>
-				<br>
 				<li>
 					<code>Cookie: sessionId:45789-145123213</code>
 					<br>
 					<br>
-					Neste tipo de cookie é possivel supor duas coisas: id do usuário e um número aleatório. Estes tipos de cookies podem ser muito vulneraveis a <i>session hijacking</i>. Por duas motivos: podem ser simples de deduzir e podem ser simples de ser manipulados.
+					Estes tipos de tokens que contêm apenas números inteiros são um dos mais primários existentes. Neste tipo de cookie é possivel supor a existência de dois parâmetros que controlem a sessão: id do usuário e um número aleatório. Estes tipos de cookies podem ser muito vulneraveis a <i>session hijacking</i>. Por duas motivos: podem ser simples de deduzir e podem ser simples de ser manipulados.
 					<br>
 					<br>
 				</li>
 				<li>
-					<code>Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c</code>
+					<code>Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0Ij<br>oxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c</code>
 					<br>
 					<br>
-					Neste tipo de token, que é codificado em base 64, esta contido 3 informações: o <i>header</i>, <i>payload</i> e <i>signature</i>. Onde cada sessão é separada por um ponto(<code>.</code>) Este tipo de token pode conter uma série de informações que podem ser definidas durante o desenvolvimento. As informações que podem estar presentes são:
+					Neste tipo de token, que é conhecido como JWTs, estão contidos três conjuntos de informações: o <i>header</i>, <i>payload</i> e <i>signature</i>. Onde cada sessão é separada por um ponto(<code>.</code>) Este tipo de token, particularmente no <i>payload</i>, pode conter uma série de informações que podem ser definidas durante o desenvolvimento. As informações que podem estar presentes são:
 					<ul>
 						<li>
 							Nome do usuário
@@ -207,7 +210,7 @@
 			</ul>
 			<br>
 			<br>
-			Alguns cuidados precisam ser tomados quando se utilizam cookies e tokens para gerenciamento de sessões, são eles:
+			Alguns cuidados precisam ser tomados quando se utilizam cookies e tokens para gerenciamento de sessões, alguns deles são:
 			<ul>
 				<li>
 					Não deixar a geração de tokens previsíveis. Como por exemplo incrementar de um em um o <i>cookie</i> para controle de sessão. Este tipo de controle tornaria extremamente fácil um atacante roubar a sessão de um usuário.
@@ -219,28 +222,29 @@
 					Manter o tempo de expiração do token baixo para evitar roubo de sessões.
 				</li>
 				<li>
+					Gere sempre novos tokens a cada sessão, como também após o tempo de expiração. Não mantenha os tokens estáticos.
+				</li>
+				<li>
 					Invalidar tokens assim que usuários realizarem o logout da aplicação.
 				</li>
 				<li>
 					Não passar tokens via parâmetros na <i>query</i>.
 				</li>
 				<li>
-					Gere sempre novos tokens a cada sessão. Não matenha os tokens estáticos.
-				</li>
-				<li>
 					Não permitir que qualquer usuário gere tokens para qualquer outro usuário, seja por parâmetros em <i>query</i> ou através de POSTs.
 				</li>
 				<li>
-					Trate os tokens de forma segura. Proteja-os nos logs, através de um acesso controlado, e proteja-os através da camada de transporte usando sempre HTTPs.
+					Trate os tokens de forma segura. Proteja-os nos logs, através de um acesso controlado, e proteja-os através da camada de transporte usando sempre HTTPS.
+				</li>
+				<li>
+					Fique atento a ataques de <i>Cross-site scripting</i>(XSS) na sua aplicação. Em caso vulneráveis um atacante pode roubar a sessão de outros usuários explorando esta fraqueza.
 				</li>
 			</ul>
-			<br>
-			<br>
-			Como é possivel observar há multiplas formas de, tanto entender como a aplicação funciona, em caso de cookies e tokens muito descritivos, como manipular os cookies para roubar sessões, em caso de cookies que não possuem validações no backend.
+			Como é possivel observar há multiplas formas de, tanto entender como a aplicação funciona, em caso de cookies e tokens muito descritivos, como manipular os cookies para roubar sessões, em caso de cookies que não possuem validações no <i>backend</i>. Apesar de forneceram um mecanismo de controle extremamente útil se não forem tratados de forma correta podem gerar sérios problemas.
 			<br>
 			<br>
 			<h2><u>Controle de Acessos</u></h2>
-			Como um dos principais métodos de segurança os controles de acesso a funções existente no sistema são primordiais para defender ações inesperadas de usuários que não possuam privilégios. Vulnerabilidades relacionadas ao controle de acesso pode não somente bagunçar o banco de dados, mas pode comprometer o sistema como um todo. Veremos aqui alguns tipos de vulnerabilidades relacionadas.
+			Como um dos principais métodos de segurança os controles de acesso a funções existentes no sistema são primordiais para defender ações inesperadas de usuários que não possuam privilégios. Vulnerabilidades relacionadas ao controle de acesso pode não somente bagunçar o banco de dados, mas pode comprometer o sistema como um todo. Veremos aqui alguns tipos de vulnerabilidades relacionadas a este tópico.
 
 			<h3>Funcionalidade completamente desprotegida</h3>
 
@@ -248,30 +252,30 @@
 			<br>
 			<br>
 			<code>
-				POST /createAdmin?user=admin&pass=12345&isAdmin=true
+				POST /createAdmin?user=admin&pass=12345
 			</code>
 			<br>
 			<br>
-			Este tipo de endpoint deve, supostamente, criar um usuário do tipo administrador que possuirá privilégios máximos no sistema. E sendo assim deveria ser protegida no lado do servidor e ser somente realizada através de outros usuários do tipo administrador e não ser controlada através de parâmetros na URL. Em caso negativo, qualquer usuário pode acabar criando um usuário com altos privilégios que poderá executar ações críticas do sistema. Sempre se deve verificar se o usuário pode realizar a ação feita.
+			Este tipo de endpoint deve, a primeira vista, criar um usuário do tipo administrador que possuirá privilégios máximos no sistema. E sendo assim deveria ser protegida no lado do servidor e ser somente realizada através de outros usuários do tipo administrador. Em caso negativo, qualquer usuário pode acabar criando uma conta com altos privilégios que poderá executar ações críticas do sistema. Sempre se deve verificar se o usuário pode realizar uma ação, principalmente se for uma ação crítica no sistema.
 
-			<h3>Falta restrição de acesso de novas <i>features</i></h3>
+			<h3>Falta restrição de acesso à novas <i>features</i></h3>
 
-			Muitas vezes, novas <i>features</i> são colocadas em produção e não são diretamente referenciadas através de links e botões na UI. Entretanto não se deve assumir que atacantes não encontrariam esses caminhos porque não são referenciados. Se deve sempre proteger esses caminhos para evitar que informações sejam vistas antes do lançamento.
+			Muitas vezes, novas <i>features</i> são colocadas em produção e não são diretamente referenciadas através de links e botões na UI. Entretanto não se deve assumir que atacantes não encontrariam esses caminhos porque não são referenciados. Deve-se sempre proteger esses caminhos para evitar que informações sejam vistas antes do lançamento oficial evitando assim geração de inconsistências.
 
 			<h3><i>Insecure Direct Object Reference</i> - IDOR</h3>
-			Muitas vezes objetos e dados são referenciados através de IDs. Estes IDs são geralmente incrementados de um em um. Estes objetos e dados devem sempre estar protegidos através de um componente de autorização verificando sempre se o usuário que esta tentando acessar o recurso pode visualizar o conteúdo. Quando este componente não existe, ou não esta validando corretamente, informações sensíveis podem estar sendo exibidas a usuários que não deveriam estar as visualizando, conforme o exemplo de URL abaixo:
+			Muitas vezes objetos e dados são referenciados através de IDs. Estes IDs podem possuir um grau de entropia baixo para sua geração(incrementando de um em um) ou podem ser gerados de forma pseudo-aleatória(GUID). Estes objetos e dados devem sempre estar protegidos através de um componente de autorização verificando sempre se o usuário que esta tentando acessar o recurso pode visualizar o conteúdo. Quando este componente não existe, ou não esta validando corretamente, informações sensíveis podem estar sendo exibidas a usuários que não deveriam estar às visualizando, conforme o exemplo de URL abaixo:
 			<br>
 			<br>
 			<code>
-				http://example.com/confidentialDoc1234?&isAdmin=true
+				http://example.com/confidentialDoc1234
 			</code>
 			<br>
 			<br>
 			Este tipo de URL deve sempre validar as credenciais no lado do servidor e se o usuário logado possui autorização de visualizar a página.
-			<h3>Vulnerabilidades em ações de multi-estagios</h3>
-			Em casos em que existem multiplas etapas para executar ações, como po exemplo realizar um pedido, ou compra, o valor deve ser validado em todas as etapas. O desenvolvedor não deve nunca confiar que, dado que o usuário chegou a um passo, os passos anteriores já foram validados e checados.
+			<h3>Vulnerabilidades em ações de multi-estágios</h3>
+			Em casos em que existem multiplas etapas para executar ações, como por exemplo realizar um pedido, ou compra, o valor deve ser validado em todas as etapas. O desenvolvedor não deve nunca confiar que, dado que o usuário chegou a um passo, os passos anteriores já foram validados e checados e sendo assim algo que não deve se preocupar.
 			<h3>Falta de restrições entre verbos HTTP</h3>
-			Existem métodos e endpoints que executam ações sensíveis, mas que retornam também informações sensíveis quando recebem os parametros e os verbos corretos. Entretanto se utilizados verbos diferentes, com os mesmos parâmetros, servidores que não possuem validações podem mesmo assim trazer respostas e realizar ações. Por exemplo:
+			Existem métodos e endpoints que executam ações sensíveis, mas que retornam também informações sensíveis quando recebem os parâmetros e os verbos corretos. Entretanto se utilizados verbos diferentes, com os mesmos parâmetros, servidores que não possuem as devidas validações podem mesmo assim trazer respostas e realizar ações. Por exemplo:
 			<br>
 			<br>
 			<code>
@@ -283,7 +287,7 @@
 			</code>
 			<br>
 			<br>
-			Como o usuário logado não possui privilégios de criação de admins, o POST não funciona.
+			Como o usuário logado é um atacante e não possui privilégios de criação de admins, o POST retorna como resposta um código <code>403 Forbidden</code>.
 			<br>
 			<br>
 			<code>
@@ -295,9 +299,9 @@
 			</code>
 			<br>
 			<br>
-			Porém em casos de que o servidor não valida os verbos utilizados, esta chamada acima pode ser aceita pelo servidor e ser executada.
+			Porém em casos de que o servidor não valida os verbos utilizados, esta chamada acima talvez possa ser e ser executada. Sempre mantenha dos verbos e dos tipos de ações que cada um pode realizar não os deixando de forma genérica.
 			<h3>Controles de acesso baseado em parâmetros</h3>
-			É extremamente comum aplicações confiarem nos parâmetros passados ao servidor para validar e checar se ações podem ser executadas. Isto é uma das formas mais primárias de ataque e manipulação utilizada por adversários que tentam explorar aplicações. É o primeiro escopo explorado por atacantes. Algumas delas seriam:
+			É extremamente comum aplicações confiarem nos parâmetros passados ao servidor para validar e checar se ações podem ser executadas. Isto é uma das formas mais primárias de ataque e manipulação utilizada por adversários que tentam explorar aplicações. É o primeiro escopo explorado. Algumas delas seriam:
 			<ul>
 				<li>
 					Controles de acesso baseado em parâmetro
@@ -313,12 +317,12 @@
 					</code>
 					<br>
 					<br>
-					Este tipo de controle pode ser explorado para realizar as mais diversas ações de um sistema, desde visualização até modificações de pontos importantes do sistema.
+					Este tipo de controle pode ser explorado para realizar as mais diversas ações de um sistema, desde visualização até modificações de pontos importantes do sistema. Uma simples mudança na flag <code>isAdmin</code> pode permitir o/a acesso/ação a uma área restrita do sistema.
 					<br>
 					<br>
 				</li>
 				<li>
-					Controles de acesso baseado no <i>header referer</i>
+					Controles de acesso baseado no <i>header Referer</i>
 					<br>
 					<br>
 					<code>
@@ -329,7 +333,7 @@
 					</code>
 					<br>
 					<br>
-					A resposta deste request acima será 403 pois o <i>referer</i> esta apontando para a página de visualização.
+					A resposta deste request acima será 403 pois o <i>referer</i> esta apontando para uma página de um usuário que possui apenas privilégios de visualizador.
 					<br>
 					<br>
 					<code>
@@ -340,15 +344,20 @@
 					</code>
 					<br>
 					<br>
-					Entretanto se mudarmos o parâmetro para uma página referenciando o <i>admin</i> a visualização do documento será permitada.
+					Entretanto se mudarmos o parâmetro para uma página referenciando usuários do tipo <i>admin</i> a visualização do documento será permitada e retornará com sucesso a informação.
 				</li>
 			</ul>
 		</div>
+		<h2><u>Log e alerte</u></h2>
+		Neste post vimos um pouco sobre ataques e vulnerabildiades em autenticação, controle de acesso e sessão. É de extrema importância que, para cada uma destas acções críticas, exista um monitoramento e um controle. Somente assim será possível tanto detectar como tomar as devidas ações de mitigação para evitar novos eventos no futuro. Um <i>log</i> para cada ação crítica realizada pode entregar muito e ajudaria bastante em uma investigação de um possível ataque. 
 		<br>
 		<br>
-		Neste post vimos um pouco sobre ataques e vulnerabildiades em autenticação, controle de acesso e sessão. Para cada um dos tópicos demonstrado aqui é possível encontrar mais outras "mil possibilidades" de explorar vulnerabilidades. O objetivo deste documento é dar apenas uma perspectiva das possibilidades que podem ser exploradas em cada uma dessas áreas.
+		Para cada um dos tópicos demonstrado aqui é possível encontrar mais outras "mil possibilidades" de explorar vulnerabilidades. O objetivo deste documento era dar apenas uma perspectiva e fazer os leitores entenderem como ações de atacantes que envolvem justamente estas partes críticas do sistema podem causar uma série de problemas se não forem mitigadas de forma correta por estes mesmos controles.
 		<br>
 		<br>
+
+		@soareswallace
+
 		<br>
 		<br>
 	</body>
