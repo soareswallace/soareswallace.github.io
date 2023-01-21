@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Sem revisão: A Lei de Conway e o saber pensar.</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="single is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="../../index.html">Wallace Soares</a></h1>
+						<nav class="links">
+							<ul>
+								<li><a href="../articles/index.html">Artigos</a></li>
+								<li><a href="../pensamentos/index.html">Pensamentos</a></li>
+								<li><a href="../sec/index.html">Sec</a></li>
+								<li><a href="../sw/index.html">Software Engineering</a></li>
+							</ul>
+						</nav>
+					</header>
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2><a href="#">Sem revisão: A Lei de Conway e o saber pensar.</a></h2>
+									</div>
+									<div class="meta">
+										<time class="published" datetime="2022-10-26">October 26, 2022</time>
+										<a href="#" class="author"><span class="name">Wallace Soares</span><img src="../images/avatar.jpg" alt="" /></a>
+									</div>
+								</header>
+								<span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
+								<div>
+									É muito comum que, após aprofundar-se nos conceitos primários da computação, muitas pessoas da área caiam em questões filosóficas. Muitas vezes realizar um trabalho que hoje é puramente prático é assumir como verdade uma série de definições e hipóteses. Essa semana eu cai em uma <a href="https://www.martinfowler.com/bliki/ConwaysLaw.html"> artigo do Fowler</a> — muito bom, por sinal — que fazia a relação da comunicação entre os times com a forma como a arquitetura do software é feita. A analogia não era dele, mas sim de uma lei, chamada Lei de Conway. Sua forma direta expressa:
+                                    <br>
+                                    <br>
+                                    <i>“Qualquer organização que desenha um sistema irá produzir um software cuja estrutura é uma copia da estrutura de comunicação organizacional.”</i>
+                                    <br>
+                                    <br>
+                                    A lei vai adiante e define que a forma de integração entre os sistemas também é uma replica do que se vê na comunicação entre os diferentes times. Quando há uma organização separada em times, que se integram via qualquer tipo de interface, sua estrutura será similar há interação humana. Segundo o artigo, Conway observou que a melhor forma de garantir uma boa integração era via interação humana. Quando há uma interação saudável e amistosa entre os times, entender conceitos, forma de codificar e a lógica por trás se torna também uma experiência saudável e amistosa. Porém o inverso também é verdadeiro. Quando cada time se isola e cria seu próprio padrão de código, este será bem entendido entre seus integrantes, se bem atomizado, porém sem uma boa interação com o resto da organização não haverá design pattern que resolva.
+                                    <br><br>
+                                    Portanto, ao tomar decisões que envolvam a estrutura do código, a comunicação dos times também deve ser levada em conta. Segundo a Lei de Conway não adiantará ter um time espalhado pelo mundo, com os melhores programadores, se este time não estiver integrado ou suas atribuições não forem bem definidas e com escopo bem limitado afim de evitar falhas de integração. Isso porque, se por uma lado a integração não pode ser bem resolvida quando se fala de times espalhados pelo mundo, a sua correção pode ser vista do outro, atomizando cada vez mais as atividades e mantendo suas relações em controle absoluto. Um padrão “recente” favoreceu bastante essa tese: Micro-serviços. Ao invés de ter um grande projeto integrado, que favoreceria uma estrutura de comunicação informal e menor, separar esta grande estrutura em pedaços menores compartilhados entre times seria uma melhor abordagem quando se trata de equipes maiores. Cada equipe teria seu escopo, fechado e integrado entre si. E a comunicação com outros seriam minimizadas, apenas estabelecendo padrões e contratos bem definidos e compartilhados(idealmente) afim de garantir integrações suaves.
+                                    <br><br>
+                                    Porém o mais interessante disso tudo, na minha visão, é que a lógica observada aqui não foi puramente técnica. Não foi puramente algorítmica. Não foi puramente arquitetural. Durante nossos períodos iniciais de estágio e trabalhos, nós tendemos a aproximar muito do código e esquecer dos processos. De observar. De sermos filósofos da nossa profissão de programador. Na minha opinião, Conway precisou sair do mundo dos 0s e 1s para olhar o todo. Ele precisou observar que aquilo que replicavamos no código era, na verdade, um espelho do que fazíamos no mundo real. E nós raramente paramos para pensar sobre isso. Muitas vezes ficamos presos em otimizações, buscando melhorar desempenhos apenas “escovando bits” e às vezes não é nem disso que precisamos. Entender que uma solução não é puramente técnica é de difícil observação, mas acredito que no mundo da computação de hoje ela é cada vez mais necessária. Aqueles que o fizerem estarão não apenas aplicando a técnica, mas relacionando o saber as formas de pensar.
+								</div>
+	</article>
+				<!-- Footer -->
+					<section id="footer">
+						<ul class="icons">
+							<li><a href="https://twitter.com/soareswallace" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						</ul>
+						<p class="copyright">&copy; Wallace Soares. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a href="http://unsplash.com">Unsplash</a>.</p>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
