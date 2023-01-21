@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>OAM</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="single is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="../index.html">Wallace Soares</a></h1>
+						<nav class="links">
+							<ul>
+								<li><a href="../articles/index.html">Artigos</a></li>
+								<li><a href="../pensamentos/index.html">Pensamentos</a></li>
+								<li><a href="../sec/index.html">Sec</a></li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2><a href="#">OAM</a></h2>
+									</div>
+									<div class="meta">
+										<time class="published" datetime="2021-04-16">April 16, 2021</time>
+										<a href="#" class="author"><span class="name">Wallace Soares</span><img src="../images/avatar.jpg" alt="" /></a>
+									</div>
+								</header>
+								<span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
+								<div>
+									Neste artigo não irei explorar os detalhes da metodologia aplicada, assim como não irei explorar também detalhes de fabricação da maquina. O ponto que mais será explorado será os resultados.
+			Orbital-angular-momentum (OAM) é explorado neste <a href="https://www.nature.com/articles/s41598-017-17580-y">artigo</a> para aumentar a capacidade de transmissão em espaço livre entre um móvel - seja ele um drone ou um objeto similar - e uma estação base. Enquanto a demanda de comunicação em espaço livre foi aumentando com o passar dos anos a capacidade de estabelecer comunicações que provém uma largura de banda confiavel precisou acompanha-lá. Entretando uma capacidade alta de trasnmissão não suficiente para este tipo de comunicação. É necessario também que a capacidade de intereceptação desta comunicação seja extremamente limitada, visto que a maior parte das aplicações deste porte envolvem, por exemplo, drone militares. Um tipo de comunicação, chamada de Free-space-optical comuinications (FSO), vem ganhando os olhares nos ultimos anos dado que possui uma grande capacidade de transmissão, assim como um baixa chance de interceptação. Existem 2 tipos de modos que podem ser usados para operar FSO:
+
+			<ul>
+  				<li>Space-division-multiplexing (SDM)</li>
+  				<li>Mode-division-multiplexing (MDM)</li>
+			</ul>
+
+			A principal diferença entre os dois é que o SDM manda cada feixe de dados a cada momento. Isso limitaria a quantidade de dados a ser enviada. Apesar da comunicação possuir alta capacidade de transmissão, em operações de baixa latência esse modo seria um fator limitante. Já o MDM consegue enviar multiplos feixes ortogonalmente espaçados. Isso permite multiplexação no transmissor e menor crosstalk entre feixes. Porém uma melhoria mais esperada seria utilizar OAM. Trabalhos anteriores ja encontraram links com até 2.5Tbit/s usando 32 modos OAM em estações fixas. Entretanto se vê pouco uso quando tratamos de estações móveis. Isso se deve a principalmente dois fatores:
+
+			<ul>
+  				<li>Alinhamento</li>
+  				 Neste caso a falta de alinhamento entre trasnmissor e receptor acarreta em um aumento crosstalk ocorrendo intenferencia entre modos gerando uma perda de pacote.
+  				<li>Turbulência</li>
+  				No caso da turbulencia os resultados são parecidos com o alinhamento. Produzida pelas helices/turbinas a turbolência modifica a fase do feixe e isso tem como consequência uma variação na energia recebida pelo receptor que incorretamente decodifica o modo.
+			</ul>
+
+			<img src="images/Intensity-profile-and-recorded-interference-patterns-of-the-beam-generated-by-the.png" alt="https://www.researchgate.net/figure/Intensity-profile-and-recorded-interference-patterns-of-the-beam-generated-by-the_fig3_264235911" width="700" height="339">
+			<br>
+			<a href="https://www.researchgate.net/figure/Intensity-profile-and-recorded-interference-patterns-of-the-beam-generated-by-the_fig3_264235911">Optical spin-to-orbital angular momentum conversion in ultra-thin metasurfaces with arbitrary topological charges</a>
+
+			<h1>Como funciona o OAM?</h1>
+
+			Cada modo do OAM possui tanto um sentido de rotação - podendo sem horário ou anti-horário - e um deslocamento de fase. Quantidade de hélices depende do numero atribuido ao l da imagem acima. Sendo positivo sua rotação se da pelo sentido horário, sendo negativo anti-horário.
+
+			O objetivo do artigo é utilizar este modo em UAVs (Unmaned-aerial-vehicles) e verificar os parâmetros encontrados. As condições do experimentos são em espaço aberto e a uma distancia de 100m. Isso validando a trasnmissão com o UAV parado no ar e a uma velocidade de 0,1m/s
+
+			<h1>Experimento</h1>
+
+			<img src="images/oam-exp.png" alt="https://www.researchgate.net/figure/Intensity-profile-and-recorded-interference-patterns-of-the-beam-generated-by-the_fig3_264235911" width="821" height="278">
+
+			<br>
+			<img src="images/oam-device.png" alt="https://www.researchgate.net/figure/Intensity-profile-and-recorded-interference-patterns-of-the-beam-generated-by-the_fig3_264235911" width="821" height="558">
+			<br>
+			<br>
+			Apesar do UAV possuir um sistema que tenta alinhar ao máximo os feixes de dados, não possuir um transmissor e possuir somente um refletor, o alinhamento permancece sendo um desafio. E ainda que os feixes estivessem perfeitamente alinhados, devido a defeitos na fabricação - o que é algo inerente ao sistema - ocorre que sempre há uma diferença de pelo menos 1arcsegundo. Isso leva a um offset entre feixes de 0.2mm. Como pode ser observado nas iamgens abaixo.
+			Medições feitas durante o experimento mostram que o sistema é mais tolerante a falta de alinhamento vertical do que horizontal. Isso se deve ao fato da função de transferência possuir um valor dependente da direção horizontal.
+
+			<br>
+			Sob o ponto de vista da interceptação um alto alinhamento que gere um alto poder de recepção pode ser visto como algo positivo. Visto que para interceptar e realmente decodificar a mensagem um atacante deve obter o alinhamento exato para captura do feixe.
+			<br>
+			<img src="images/oam-results.png" width="1017" height="944">
+			<br>
+
+			Indo para o resultado do experimento é notavel que a diferença na captura do feixe de luz entre os testes sob condições de solo, voando de forma parada e em movimento são bem diferentes. O error-bit-rate (EBR) tende a ser muito maior quando o UAV está voando em movimento. Mas isso prejudicará a transmissão? De certa forma, sim. O suficiente para que os modos sejam identificados de forma incorreta? Como é possivel verificar na imagem (e) acima, não. O modo desejado ainda é identificado como o correto.
+
+			Dada a imagem (b) acima era também esperado que ter UAV planando no ar, parado, que o EBR possuiría um valor aceitavel. Entretando nao é o que acontece conforme vemos na imagem (a) abaixo. Por muitas vezes o erro supera o foward-error correction (FEC). Isso, segundo os autores, se da por tres motivos:
+
+			<ul>
+  				<li>Ajustes momentaneos no sistema de trackeamento. Estes que pode ser melhorados para que pequenos ajustes não causem tantos erros de captura.</li>
+  				<li>Variação no pareamento do multiplexador OAM</li>
+  				<li>Crosstalk intermitente</li>
+			</ul>
+
+
+			<img src="images/oam-results-2.png" width="759" height="762">
+
+			<br>
+
+
+
+			No fim os autores concluem que a comunicação entre uma estação base e um UAV é possivel. Entretando existem desafios.
+			<ul>
+  				<li>Divergência</li>
+  					O feixe de luz aplicado se dissipa proporcionalmente ao fator l. Quando maior for seu fator l, maior terá que ser o tamanho do receptor que capturará o feixe. Por exemplo, para o mesmo feixe de 20cm a uma distancia de 1km, um OAM +3 e um OAM +20 possuem diametros no receptor de ~20cm e ~47cm, respectivamente.
+  				<li>Número de modos</li>
+  					Se aumentando o número de modos é possivel eliminar o crosstalk. A interferencia seria muito menor. Porém, como visto no ponto acima, o desafio estará agora no receptor.
+  				<li>Turbulencia</li>
+  					Como já falado, além de causar pertubação no alinhamento entre transmissor e receptor, a turbulência também causa uma defasagem no angulo da hélice do feixe prejudicando a decodificação.
+			</ul>
+			Esses desafios sendo superados os pesquisadores acreditam que transmissões ultrapassando o Tbit/s, a quilometros de distância e utilizando multiplexação OAM são possíveis.
+
+		<hr>
+		This article is only a summary what is in this <a href="https://www.nature.com/articles/s41598-017-17580-y">article</a> provided by Nature.
+								</div>
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<ul class="icons">
+							<li><a href="https://twitter.com/soareswallace" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						</ul>
+						<p class="copyright">&copy; Wallace Soares. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a href="http://unsplash.com">Unsplash</a>.</p>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>

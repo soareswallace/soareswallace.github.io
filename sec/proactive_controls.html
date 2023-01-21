@@ -1,559 +1,589 @@
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
-	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-	<meta content="utf-8" http-equiv="encoding">
-	<style>
-		body {
-			max-width: 50em;
-			margin: 0 auto;
-			color: white;
-			background: black;
-		}
-		pre {
-			white-space: pre-wrap;
-		}
-		@media only screen and (max-width:768px) {
-			body {
-				max-width:100%;
-			}
-		}
-		a:link {
-			color: #0a0 ;
-		}
-		a:visited {
-			color: #004100 ;
-		}
-	</style>
-	<title>OWASP Top 10 Controles Proativos de Segurança</title>
-	 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<body>
-		<h1>OWASP Top 10 Controles Proativos de Segurança</h1>
-		<hr>
-		<div>
-            Os 10 controles proativos de segurança são uma série de diretrizes recomendadas aos desenvolvedores e arquitetos de sistema a fim de garantir um grau de segurança nos seus projetos.
-            Eles são definidos em ordem crescente de prioridade, sendo o número 1 o mais importante de todos. Neste artigo iremos cobrir os 10 controles proativos de segurança mais importantes que todo desenvolvedor deveria saber e que podem ser encontrados no site da <a href="https://owasp.org/www-project-proactive-controls/">OWASP</a>.
-            <br>
-            <br>
-            
-            <h2><u>C1: Definindo requisitos de segurança</u></h2>
-            <div>
-                <i>"Um requisito de segurança é uma determinação que garanta que propriedades de segurança de software estão sendo satisfeitas."</i>
-                Como assim? Basicamente requisitos de segurança funcionam como definições que o software deve atender. Por exemplo: "Não deve ser possível acessar o sistema utilizando padrões de login e senha."
-                Ou de maneira mais formal:
-                <br>
-                <br>
-                <code>
-                    2.19 Verifique que não há usuários e senha padrão em uso pela a aplicação ou por qualquer um de seus componentes.(ex.: Admin/admin)
-                </code>
-                <br>
-                <br>
-                Existem incrementos aos requisitos de segurança que os levam a uma melhor compreensão pelos arquitetos e desenvolvedores. Um exemplo dessas melhorias seriam os casos de mau-uso do sistema. Os casos de mal-uso são basicamente estórias de usuário em que o usuário é um atacante tentando explorar uma vulnerabilidade.
-                Por exemplo:
-                <br>
-                <br>
-                <code>
-                    Como um atacante, eu posso introduzir um login e senha padrão para assim ganhar acesso ao sistema.
-                </code>
-                <br>
-                <br>
-                Como pode ser visto, este caso de mau-uso tem as mesmas características de sistema que a definição de requisito anterior, porém é mais fácil de ser entendido e testado.
-                <br>
-                A correta aplicação deste controle envolve descobrir, selecionar, documentar, implementar e confirmar a correta implementação de cada funcionalidade de segurança dentro da aplicação.
+	<head>
+		<title>OWASP Top 10 Controles Proativos de Segurança</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="single is-preload">
 
-                <h3>Descobrindo e selecionando requisitos</h3>
-                Esta é uma das tarefas mais importantes. Nesta fase de design, o arquiteto pode prevenir uma série de vulnerabilidades que poderiam vir a acontecer.
-                Ela consiste em buscar através de padrões de projeto - <a href="https://owasp.org/www-project-application-security-verification-standard/">ASVS</a>, por exemplo - e escolher aquele que seria prioridade para cada versão do seu software.
-                O foco nesta fase é balancear um número de requisitos de segurança que seriam atingíveis pelo time em uma dada versão e ir incrementando sua cobertura.
+		<!-- Wrapper -->
+			<div id="wrapper">
 
-                <h3>Investigar e documentar</h3>
-                Nesta fase, dado um conjunto de requisitos de segurança, o desenvolvedor pesquisa e documenta na aplicação existente quais dos requisitos estão sendo atendidos. Esta fase é essencial para propor melhorias ao sistema.
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="../index.html">Wallace Soares</a></h1>
+						<nav class="links">
+							<ul>
+								<li><a href="../articles/index.html">Artigos</a></li>
+								<li><a href="../pensamentos/index.html">Pensamentos</a></li>
+								<li><a href="../sec/index.html">Sec</a></li>
+							</ul>
+						</nav>
+					</header>
+				<!-- Main -->
+					<div id="main">
 
-                <h3>Implementar</h3>
-                Após a documentação feita agora é elaborado uma série de mudanças que serão realizadas no sistema a fim de adequá-lo aos requisitos de segurança definidos nas etapas anteriores. Cada aplicação deve aqui sofrer as modificações necessárias para que atenda ao que foi previamente definido como requisito. Após as modificações feitas - ou até durante as mesmas - testes devem ser criados a fim de garantir que o requisito esteja sendo atendido.
-            </div>
-            <h2><u>C2: Explorando <i>frameworks</i> e bibliotecas de Segurança</u></h2>
-            <div>
-                Este controle foca no uso de bibliotecas e <i>frameworks</i> que garantam uma melhor segurança para a aplicação. Implementar seus próprios é altamente não recomendado.
-                É importante ter em mente que existe uma grande variedade de bibliotecas que já protegem sua aplicação de vulnerabilidades e está tudo bem usá-las. Entretanto é necessário ter alguns cuidados:
-                <ul
-                    <li>
-                        <code>Use bibliotecas e frameworks a partir de fontes confiáveis e que sejam mantidas com frequência.</code>
-                    </li>
-                    <li>
-                        <code>Crie e mantenha um inventário que catalogue todas as bibliotecas de terceiros que são utilizadas pelo seu projeto.</code>
-                    </li>
-                    <li>
-                        <code>Proativamente as mantenha atualizadas. Existem ferramentas automatizadas que garantem esta checagem, como o dependabot e o OWASP <i>dependency check</i>.</code>
-                    </li>
-                    <li>
-                        <code>Reduza a superfície de ataque encapsulando o uso das bibliotecas e expondo apenas o comportamento requisitado pelo seu software.</code>
-                    </li>
-                </ul>
-            </div>
-            <h2><u>C3: Protegendo o acesso à base de dados.</u></h2>
-            <div>
-                Esta seção envolve proteger a base de dados partindo de diversos pontos de ataque:
-                <ul>
-                    <li>
-                        <code>Queries</code>
-                    </li>
-                    <li>
-                        <code>Configuração</code>
-                    </li>
-                    <li>
-                        <code>Autenticação</code>
-                    </li>
-                    <li>
-                        <code>Comunicação</code>
-                    </li>
-                </ul>
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2><a href="#">OWASP Top 10 Controles Proativos de Segurança</a></h2>
+									</div>
+									<div class="meta">
+										<time class="published" datetime="2022-05-03">May 03, 2022</time>
+										<a href="#" class="author"><span class="name">Wallace Soares</span><img src="../images/avatar.jpg" alt="" /></a>
+									</div>
+								</header>
+								<span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
+								<div>
+									Os 10 controles proativos de segurança são uma série de diretrizes recomendadas aos desenvolvedores e arquitetos de sistema a fim de garantir um grau de segurança nos seus projetos.
+									Eles são definidos em ordem crescente de prioridade, sendo o número 1 o mais importante de todos. Neste artigo iremos cobrir os 10 controles proativos de segurança mais importantes que todo desenvolvedor deveria saber e que podem ser encontrados no site da <a href="https://owasp.org/www-project-proactive-controls/">OWASP</a>.
+									<br>
+									<br>
+									
+									<h2><u>C1: Definindo requisitos de segurança</u></h2>
+									<div>
+										<i>"Um requisito de segurança é uma determinação que garanta que propriedades de segurança de software estão sendo satisfeitas."</i>
+										Como assim? Basicamente requisitos de segurança funcionam como definições que o software deve atender. Por exemplo: "Não deve ser possível acessar o sistema utilizando padrões de login e senha."
+										Ou de maneira mais formal:
+										<br>
+										<br>
+										<code>
+											2.19 Verifique que não há usuários e senha padrão em uso pela a aplicação ou por qualquer um de seus componentes.(ex.: Admin/admin)
+										</code>
+										<br>
+										<br>
+										Existem incrementos aos requisitos de segurança que os levam a uma melhor compreensão pelos arquitetos e desenvolvedores. Um exemplo dessas melhorias seriam os casos de mau-uso do sistema. Os casos de mal-uso são basicamente estórias de usuário em que o usuário é um atacante tentando explorar uma vulnerabilidade.
+										Por exemplo:
+										<br>
+										<br>
+										<code>
+											Como um atacante, eu posso introduzir um login e senha padrão para assim ganhar acesso ao sistema.
+										</code>
+										<br>
+										<br>
+										Como pode ser visto, este caso de mau-uso tem as mesmas características de sistema que a definição de requisito anterior, porém é mais fácil de ser entendido e testado.
+										<br>
+										A correta aplicação deste controle envolve descobrir, selecionar, documentar, implementar e confirmar a correta implementação de cada funcionalidade de segurança dentro da aplicação.
+						
+										<h3>Descobrindo e selecionando requisitos</h3>
+										Esta é uma das tarefas mais importantes. Nesta fase de design, o arquiteto pode prevenir uma série de vulnerabilidades que poderiam vir a acontecer.
+										Ela consiste em buscar através de padrões de projeto - <a href="https://owasp.org/www-project-application-security-verification-standard/">ASVS</a>, por exemplo - e escolher aquele que seria prioridade para cada versão do seu software.
+										O foco nesta fase é balancear um número de requisitos de segurança que seriam atingíveis pelo time em uma dada versão e ir incrementando sua cobertura.
+						
+										<h3>Investigar e documentar</h3>
+										Nesta fase, dado um conjunto de requisitos de segurança, o desenvolvedor pesquisa e documenta na aplicação existente quais dos requisitos estão sendo atendidos. Esta fase é essencial para propor melhorias ao sistema.
+						
+										<h3>Implementar</h3>
+										Após a documentação feita agora é elaborado uma série de mudanças que serão realizadas no sistema a fim de adequá-lo aos requisitos de segurança definidos nas etapas anteriores. Cada aplicação deve aqui sofrer as modificações necessárias para que atenda ao que foi previamente definido como requisito. Após as modificações feitas - ou até durante as mesmas - testes devem ser criados a fim de garantir que o requisito esteja sendo atendido.
+									</div>
+									<h2><u>C2: Explorando <i>frameworks</i> e bibliotecas de Segurança</u></h2>
+									<div>
+										Este controle foca no uso de bibliotecas e <i>frameworks</i> que garantam uma melhor segurança para a aplicação. Implementar seus próprios é altamente não recomendado.
+										É importante ter em mente que existe uma grande variedade de bibliotecas que já protegem sua aplicação de vulnerabilidades e está tudo bem usá-las. Entretanto é necessário ter alguns cuidados:
+										<ul
+											<li>
+												<code>Use bibliotecas e frameworks a partir de fontes confiáveis e que sejam mantidas com frequência.</code>
+											</li>
+											<li>
+												<code>Crie e mantenha um inventário que catalogue todas as bibliotecas de terceiros que são utilizadas pelo seu projeto.</code>
+											</li>
+											<li>
+												<code>Proativamente as mantenha atualizadas. Existem ferramentas automatizadas que garantem esta checagem, como o dependabot e o OWASP <i>dependency check</i>.</code>
+											</li>
+											<li>
+												<code>Reduza a superfície de ataque encapsulando o uso das bibliotecas e expondo apenas o comportamento requisitado pelo seu software.</code>
+											</li>
+										</ul>
+									</div>
+									<h2><u>C3: Protegendo o acesso à base de dados.</u></h2>
+									<div>
+										Esta seção envolve proteger a base de dados partindo de diversos pontos de ataque:
+										<ul>
+											<li>
+												<code>Queries</code>
+											</li>
+											<li>
+												<code>Configuração</code>
+											</li>
+											<li>
+												<code>Autenticação</code>
+											</li>
+											<li>
+												<code>Comunicação</code>
+											</li>
+										</ul>
+						
+										<h3>Queries seguras</h3>
+										<div>
+											Até hoje, com todos os avanços que tivemos nos <i>frameworks</i> modernos e mais utilizados pela indústria, existe sempre uma vulnerabilidade recorrente a cada ano nos OWASP Top 10: SQL Injection.
+											SQL Injection é basicamente quando uma entrada não confiável e que não é tratada é executada na forma de uma query de banco. Esta vulnerabilidade é uma das mais perigosas para uma aplicação porque ela pode não somente apagar com todo o banco, como também expor informações sigilosas. Um atacante pode inclusive escalar essa vulnerabilidade e explorar a rede a qual o servidor pertence.
+											Para prevenir este tipo de vulnerabilidade toda entrada deve ser tratada. Na verdade, em geral, toda entrada dada a um sistema deve ser tratada como insegura. Com isso em mente um desenvolvedor conseguirá prevenir uma outra série de vulnerabilidades, como por exemplo Cross-site Scripting.
+											No caso de SQL Injection, ou SQLi, a melhor forma de fazer isso é através de parametrização de queries. Ou utilizar frameworks que já fazem isso por padrão, porém observando os pontos já discutidos em C2.
+											<br>
+											<br>
+											No caso da utilização de parametrização, é importante lembrar que existem partes de queries que não são parametrizáveis. E estas localizações dependem de qual banco está sendo utilizado.
+										</div>
+										<h3>Configuração segura</h3>
+										<div>
+											Infelizmente muitos bancos de dados não possuem uma configuração segura por padrão e, mais infelizmente ainda, alguns desenvolvedores não se preocupam em garantir que estas configurações sejam modificadas antes de coloca-lo em produção. É necessário que ao se utilizar um banco de dados o desenvolvedor tenha a preocupação de realizar as modificações necessárias para garantir um ambiente seguro para sua base de dados.
+										</div>
+										<h3>Autenticação e comunicação segura</h3>
+										<div>
+											Seguindo na mesma linha sobre a configuração, quando se é feita a autenticação e a comunicação com a base de dados deve-se garantir que:
+											<ul>
+												<li>
+													É feita através de um canal seguro e criptografado.
+												</li>
+												<li>
+													Deve-se gerenciar bem as credencias em mantê-las em repositórios seguros criptografados e não às enviar junto ao código para um VCS(GitHub, GitLab).
+												</li>
+												<li>
+													Não é recomendado utilizar a configuração padrão das bases visto que essa é a primeira forma de ataque que adversários podem tomar como foco.
+												</li>
+											</ul>
+										</div>
+									</div>
+									<h2><u>C4: Codifique e escape os seus dados</u></h2>
+									<div>
+										Codificar e escapar dados são técnicas que tem o objetivo de prevenir ataques de injeção(como o SQLi e XSS). Codificar é basicamente modificar o dado para uma nova representação que previna a realização de ataques de injeção. Um exemplo é modificar <code><</code> para <code>&amp;lt;</code> em HTML.
+										Escapar dados envolve adicionar um caracter especial antes de outro para evitar a ma interpretação. Um exemplo é a adição de uma contra barra(<code>\</code>) antes de aspas(<code>"</code>) para informar que este caracter deve ser interpretado como texto e não como fim de string.
+										Apesar de efetivo é praticamente impossível um desenvolvedor prevenir através de escape e codificação todos os tipos de ataques de injeção que existirem. A melhor opção é delegar, no geral, que os <i>frameworks</i> e bibliotecas lidem com esse tipo de validação e mantê-los sempre atualizados. Somente em caso de necessidade muito específica deve-se criar a própria regra de validação e que deve ser, futuramente, modificada para a utilização de biblioteca específica.
+										Além dos ataques mais comuns através de aplicações Web, como o SQLi e o XSS, existem outros tipos de ataque que envolvem LDAP, comandos de sistema operacional(OS Injection) e XML Injections. Todos esses podem ser evitados com codificação e escape, porém seguem a mesma regra de que é praticamente impossível cobrir todos os cenários de ataque.
+									</div>
+									<h2><u>C5: Valide todas as entradas</u></h2>
+									<div>
+										Como toda orientação sobre proteção contra ataques costuma dizer: NUNCA CONFIE NA ENTRADA DO USUÁRIO. Toda e qualquer entrada deve ser tratada como não confiável. A validação deve ser feito tanto na forma sintática, como na semântica.
+										A validação deve ser no sentido de que o dado que foi enviado é exatamente do tipo esperado(ex.: inteiro de 4 digitos) e esse dado ao ser passado entre as camadas deve ser válidado e parametrizado a cada passagem.
+										<h3>Lista de permissões</h3>
+										Uma prática comum de defesa contra estes tipos de ataques é da definição de entradas que seriam permitidas(<i>allowlist</i>) ou de forma análoga entradas que NÃO seriam permitidas(<i>blocklist</i>).
+										Entre estas duas, a medidas a mais recomendada para se iniciar uma proteção de sua aplicação é de se criar uma <i>allowlist</i> visto que o conjunto de entradas que se aceita é bem menor do que o conjunto que se proíbi. De forma simples, é mais difícil cobrir todos os casos em que um ataque é efetuado do que definir quais são as entradas válidas.
+										Mas é importante também o desenvolvedor ter em mente que esta deve ser uma das primeiras barreiras de proteção e que outras medidas devem ser impostas para se ter uma maior segurança na aplicação.
+						
+										<h3>Sempre faça a validação no servidor</h3>
+										<div>
+											Apesar de ajudar nos requisitos funcionais do negócio e permitir alguns controles de qual informação esta sendo passada ao servidor, a validação no lado do cliente não deve ser encorajada como unica forma de prevenção deste tipo de ataque. Se um desenvolvedor pretende proteger sua aplicação de adversários, é altamente recomendado que validações sejam feitas no servidor já que controles no lado do cliente podem ser facilmente ultrapassados.
+											A prática ideal é, na verdade, aplicar a validação entre as todas as camadas, tanto na entrada do dado ao servidor quanto no retorno.
+											<br>
+											<br>
+											<code>Frontend -> Controlador -> Serviço -> Banco -> Serviço -> Controlador -> Frontend</code>
+										</div>
+										<h3>Validação de entrada deve ser o primeiro passo</h3>
+										<div>
+											Como qualquer medida de prevenção de ataques, a validação de entrada não é uma bala de prata. Ela, sozinha, não consegue prevenir ataques, apesar de (tentar) manter o que esta sendo passado ao servidor como uma entrada válida. Porém uma entrada válida ainda pode ser um ataque.
+											Esta medida deve, idealmente, ser combinada com outras para aumentar a proteção do sistema.
+										</div>
+										<h3>Serialize aos poucos</h3>
+										<div>
+											Com o crescente uso de JSON para comunicação entre APIs e o frontend muitas vezes a comunicação entre os dois se baseia em objetos enormes. E quanto maior forem esses objetos mais difícil torna-se a validação do dado.
+											O desenvolvedor deve ter em mente que um conjunto menor de dados e um objeto mais conciso pode facilitar na hora de validar a informação passada.
+										</div>
+						
+										<h2>BASICAMENTE: NUNCA CONFIE NO ENTRADA DO USUÁRIO</h2>
+									</div>
+						
+									<h2><u>C6: Implemente sua identidade digital</u></h2>
+									<div>
+										A identidade digital é a maneira de se realizar o controle dos usuários que acessam a aplicação. Autenticação é, por exemplo, o processo de validar a identidade daquele que esta acessando o sistema. Controle de sessão a forma com que o servidor mantêm o estado de autenticação dos usuários. Veremos aqui algumas recomendações para uma implementação segura de controle de identidades.
+										<h3>Niveis de autenticação</h3>
+										<div>
+											A <a href="https://pages.nist.gov/800-63-3/sp800-63b.html"> publicação especial NIST 800-63B</a> descreve um guia de como implementar controles para uma identidade digital, autenticação e gerenciamento de sessão. Nesta, são apresentados 3 níveis de garantias de autenticação, chamados de Authentication Assurance Level(AAL).
+										</div>
+						
+										<h4>Nível 1</h4>
+										<div>
+											O nível 1 é reservado para aplicações de baixo risco. Reservado para aquelas aplicações que não contém PII(Informação pessoal identificavel.)
+											O nível 1 requer apenas autenticação de um único fator, tipicamente através do uso de senhas.
+						
+											<h4><u>L1: Requisitos para Senhas</u></h4>
+											<div>
+												Toda política de senha que sigam estes requisitos devem, no mínimo, possuir:
+												<ul>
+													<li>
+														Um mínimo de 8 caracteres, se possível utilizar em conjunto com autenticação de multi-fatores(MFA). Caso MFA não possa ser aplicado, o tamanho minimo deve ser aumentado para 10 caracteres.
+													</li>
+													<li>
+														Todo caracter ASCII, assim como o caractere de espaço em branco deve ser aceito como válido.
+													</li>
+													<li>
+														Deve-se encorajar o uso de senhas longas.
+													</li>
+													<li>
+														Remover estes requisitos pode diminuir bastante a efetividade da segurança. MFA e senhas longas deve ser sempre encorajado.
+													</li>
+													<li>
+														Senhas que já foram encontradas em vazamentos de login devem ser rejeitadas. Um desenvolvedor podem restringir a busca dentre as top <a href="https://github.com/danielmiessler/SecLists/tree/master/Passwords">1000 senhas mais comuns em vazamentos.</a>
+													</li>
+												</ul>
+											</div>
+						
+											<h4><u>L1: Implementar um mecanismo seguro de recuperação de senha</u></h4>
+											<div>
+												É mais comum do que se imagina que atacantes ganhem acesso a contas de usuário através do mecanismo de senha. Um exemplo de ataque é através do corpo do POST.
+												Ao se requisitar um reset de senha o cliente manda um POST ao servidor e no seu corpo contém o email do usuário.
+												<br>
+												<br>
+												<code>
+													email_to_recover:"victim@email.com"
+												</code>
+						
+												<br>
+												<br>
+												Uma manipulação que pode ser feita neste corpo é verificar se o servidor aceita mais de um email como parâmetro válido. Por exemplo:
+												<br>
+												<br>
+												<code>
+													email_to_recover:["victim@email.com", "attacker@email.com"]
+												</code>
+												<br>
+												<br>
+												Por mais incrível que parece, este exemplo é um <a href="https://hackerone.com/reports/322985">caso real de ataque</a> em que o atacante conseguiu acesso a conta da vítima, pois ao fazer essa alteração o atacante recebeu no seu email o link de reset de senha.
+												Um bom material de referência, sobre como garantir um procedimento seguro de reset de senha pode ser encontrado no <a href="https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html">forgot password cheat sheet.</a>
+											</div>
+											<h4><u>L1: Armazenar senhas de forma segura</u></h4>
+											<div>
+												Apesar das falhas graves dos anos recentes, ainda hoje existem aplicações que armazenam senhas em texto plano. Isso, obviamente, não é uma forma segura de armazaenamento. Já existem frameworks que fazem isso de forma automatica e é altamente recomendado que se aplique.
+											</div>
+										</div>
+										<h4>Nível 2</h4>
+										<div>
+											O nível 2 é reservado para aplicações que contém PII ou qualquer outra informação pessoal disponível de forma online. Neste nível é requerido o uso de OTP ou qualquer outro MFA disponível.
+											MFA garante um outra camada de segurança e garante também que o usuário que esta tentando acessar o recurso é realmente aquele quem diz ser. MFA pode ser uma combinação de:
+											<ul>
+												<li>
+													Algo que o usuário conhece: senhas ou PIN
+												</li>
+												<li>
+													Algo que o usuário possue: token ou telefone
+												</li>
+												<li>
+													Algo que faz parte do usuário: biometria
+												</li>
+											</ul>
+											É importante ter em mente que biometria, por si só, não é um excelente fator de autenticação. Pode ser facilmente obtida de forma online(ex.: fotos de rosto) ou driblada. Biometria deve sempre ser usada como um segundo fator de autenticação nestes casos.
+										</div>
+										<h4>Nível 3</h4>
+										<div>
+											O nível 3 é requerido quando o impacto de sistemas comprometidos pode gerar qualquer tipo de dano pessoal, perda financeira substancial, dano do interesse público ou envolver violações criminais ou civis. O nível 3 requer autenticação que é baseada em prova de posse através de algum tipo de protocolo de criptografia.
+											Este controle é usado quando se quer atingir o maior grau de segurança possível. Isto é geralmente atingido através de modulos criptograficos de hardware.
+										</div>
+										<h3><u>Gerenciamento de sessão</u></h3>
+										<div>
+											É utilizado para manter o estado de autenticação por um tempo limitado de tempo. Este mecanismo permite que o usuário não tenha que se re-autenticar a cada <i>request</i>.
+											O controle deve ser feito através do servidor e deve conter um identificador para o usuário. A validade deste identificador deve ser limitada e deve expirar após um período de tempo pré-determinado.
+											Abaixo há algumas sugestões que devem ser consideradas quando o gerenciamento é implementado:
+											<ul>
+												<li>
+													Garanta que o <i>session id</i> possui uma quantidade grande de caracteres, que seja único e aleatório.
+												</li>
+												<li>
+													A aplicação deve gerar um novo id a cada re-autenticação e expirar ids após um periodo de tempo pré-determinado, ou durante o <i>log-out</i>.
+												</li>
+											</ul>
+						
+											Para mais detalhes sobre quais padrões seguir o desenvolvedor pode encontrar em <a href="https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html">Session Management Cheat Sheet</a>
+										</div>
+										<h4>Cookies</h4>
+										<div>
+											É o método mais comum de se armazenar os identificadores de sessão. Os cookies armazenam e gerenciam os identificadores de sessão para aplicações web.
+											Há algumas boas práticas que devem ser seguidas ao se utilizar este metodo gerenciador de sessão.
+											<ul>
+												<li>
+													Não devem ser aplicáveis a todos os caminhos disponiveis na aplicação. Seu acesso deve ser limitado a um sub-grupo.
+												</li>
+												<li>
+													O parâmetro <i>secure</i> deve estar configurado para garantir uma transmissão segura(TLS).
+												</li>
+												<li>
+													O parâmetro <code>HttpOnly</code> deve ser configurado para prevenir que o cookie seja acessado via JavaScript.
+												</li>
+												<li>
+													A adição do parâmetro <i>samesite</i> deve ser feita para evitar Cross-site Requests e assim evitar ataques que explorem esta funcionalidade.
+												</li>
+											</ul>
+										</div>
+										<h4>Tokens</h4>
+										<div>
+											São a forma mais moderna de gerenciar a sessão de usuários após uma autenticação inicial. Gerados no servidor, não necessitam de re-autenticação para manter o usuário logado. Apenas após o tempo de expiração. Assim, lidando com apenas o estado do token, o desempenho sentido pelo cliente também é melhorado visto que não se faz necessário armazenar toda a informação e validá-la para autenticar o usuário.
+										</div>
+										<h4>JWT (JSON Web Tokens)</h4>
+										<div>
+											É um padrão aberto que define uma forma compacta e auto-contida de transmitir a informação entre o cliente e o servidor através de um objeto JSON. Esta informação é assinada digitalmente  e pode ser verificada no servidor.
+											Entretanto, é importante ter em mente que o JWT, geralmente,  não é salvo no servidor. Ele é apenas gerado e enviado ao cliente que o reutiliza até o tempo de expiração. Após este tempo o servidor gera outro JWT válido que é novamente entregue ao cliente. A cada novo request o cliente "pergunta" ao servidor se a assinatura enviada com o JWT é válida. Em caso de negativa o servidor deve requisitar ao cliente uma nova autenticação para gerar um novo JWT válido.
+										</div>
+										<br>
+										<br>
+										Apesar de ser um dos maiores tópicos deste documento, apenas vimos de forma superficial. Há muito a ser explorado aqui e que estas técnicas apresentadas devem ser combinadas sempre com mais de uma camada de segurança.
+									</div>
+									<h2><u>C7: Garanta Controles de Acesso</u></h2>
+									<div>
+										Inicialmente é preciso diferenciar autenticação de autorização. Autenticação é o processo verificar a identidade do usuário e autentica-lo ao sistema. Conceder autorização é o processo de, uma vez autenticado, verificar se um dado usuário possui os privilégios de acesso ao recurso e/ou serviço.
+										Controle de acesso pode ser implementado através das mais diferentes áreas, desde controle de acesso a dados, até cache para propósitos de escalabilidade. Existem diversos tipos de design para controle de acesso que podem ser consideradas:
+										<ul>
+											<li>
+												Controle de acesso discricionario(DAC): é o controle de acesso implementado para arquivos, entidades, objetos, etc. Este controle é geralmente baseado em privilégios dos usuários e acesso a grupos específicos.
+											</li>
+											<li>
+												Controle de acesso mandatório(MAC): é o controle de acesso baseado em níveis de sensibilidade de informação.
+											</li>
+											<li>
+												Controle de acesso baseado em privilégios(RBAC): é realizar o controle de acesso baseado nos privilégios atribuídos aos usuários.(ex.: Admin, User, Editor)
+											</li>
+											<li>
+												Controle de acesso baseado em atributo(ABAC): é o controle de acesso baseado em atributos dos objetos e arquivos e os atributos dados aos usuários. É feito uma validação cruzada entre os dois para conceder ou não o acesso.
+											</li>
+										</ul>
+						
+										<h3>Princípios de design para controle de acesso</h3>
+										<div>
+											É apresentado neste documento um conjunto de práticas para design de controle de acesso que devem ser considerados durante a fase inicial de desenvolvimento.
+											<h4>Pense no controle de acesso desde o início</h4>
+											<div>
+												Uma vez desenvolvido um sistema é extremamente custoso pensar e executar uma forma de controle de acesso partindo do mesmo. Quanto mais cedo se pensar neste controle menos trabalhoso será para manter um padrão de controle de acesso.
+												Controle de acesso é uma das principais áreas que garante a segurança de uma aplicação e deve ser pensado desde as primeiras fases de design.
+												Inicialmente design para controle de acesso pode ser simples, mas aumenta junto com a complexidade da aplicação. É necessário (também) permitir uma customização do controle de acesso para cada funcionalidade da aplicação. Entretanto esta customização não deve comprometer a segurança da aplicação.
+											</div>
+						
+											<h4>Force que todos os requests passem por checagem de acesso</h4>
+											<div>
+												É recomendado que exista no caminho de entrada dos <i>requests</i> um controle de acesso centralizado. Um módulo que valide os privilégios dos usuários a cada requisição. Esse requisito garantirá que ao realizar qualquer tipo de ação no sistema um usuário terá verificado todos os seus privilégios, evitando assim ações indesejadas.
+											</div>
+											<h3>Negue por padrão</h3>
+											<div>
+												Se não é especificamente permitido, negue a requisição. Existem várias formas de aplicar este principio em código.
+												<ul>
+													<li>
+														A aplicação pode lançar uma exceção ou um erro enquanto processa a checagem de privilégios. Nestes casos o acesso deve sempre ser negado.
+													</li>
+													<li>
+														Quando um usuário é criado, este mesmo usuário deve possuir o mínimo de privilégios possível até que alguém lhe conceda algum.
+													</li>
+													<li>
+														Quando uma nova funcionalidade é configurada, esta deve ser negado o acesso a usuários comuns até que esteja totalmente disponivel.
+													</li>
+												</ul>
+											</div>
+											<h3>Princípio do menor privilégio</h3>
+											<div>
+												Garanta que todo e qualquer acesso dado a qualquer usuário seja o mínimo necessário para a execução das suas atividades.
+											</div>
+											<h3>Não codifique de forma explicita privilégios</h3>
+											<div>
+												Muitas aplicações fazem o controle de acesso baseado em cargos e acaba se tornando bastante comum a seguinte linha de código.
+												<br>
+												<br>
+												<code>
+													if (user.hasRole("ADMIN")) || (user.hasRole("MANAGER")) {
+												</code>
+												<br>
+												<br>
+												Este tipo de codificação tem suas limitações e perigos:
+												<ul>
+													<li>
+														É naturalmente frágil e pode facilmente gerar erros de verificação em casos que o desenvolvedor esquece de adicionar novos cargos.
+													</li>
+													<li>
+														A sua manutenabilidade é extremamente complicada em ambientes compartilhados.
+													</li>
+													<li>
+														Não permite controle de acesso horizontal ou controle específico baseado em dados.
+													</li>
+												</ul>
+						
+												Um bom substituo para esta linha de código pode ser sugestão abaixo com o uso de <i>voters</i>:
+												<br>
+												<br>
+												<code>
+													if (user.hasAccess("DELETE_ACCOUNT")) {
+												</code>
+											</div>
+											<h3>Log todos os eventos que envolvem controle de acesso</h3>
+											<div>
+												Todos os eventos que envolvem a checagem de privilégios devem ser logados na aplicação para auxiliar em futuras investigações de ataques e vulnerabilidades.
+											</div>
+										</div>
+									</div>
+									<h2><u>C8: Proteja seus dados</u></h2>
+									<div>
+										Não apenas garantido pelas novas leis de proteção de dados(LGDP, GDPR), o dever de um desenvolvedor de proteger os dados dos seus usuários deve ser intríseco.
+										Atacantes podem roubar dados de usuários de diversas formas, algumas delas são a comunicação não segura e SQL Injection para copia de senhas e outras credenciais.
+						
+										<h4>1ª Etapa: Classifique seus dados</h4>
+										<div>
+											É essencial para os desenvolvedores de sistemas classificar os dados e determinar o grau de sensibilidade de cada um.
+											Assim que se categoriza esses dados o desenvolvedor de sistemas pode agora mapear as regras necessárias para proteger cada tipo de dado em cada nível de sensibilidade. Por exemplo:
+											<ul>
+												<li>
+													Informação de marketing que não é sensível pode ser categorizada como pública e seria ok colocá-la em um site púsblico.
+												</li>
+												<li>
+													Número de cartão de crédito pode ser classificado como informação privada e deve ser criptografada.
+												</li>
+											</ul>
+										</div>
+										<h4>Criptografe dados sensiveis</h4>
+										<div>
+											Ao trafegar e armazenar dados os desenvolvedores de sistemas devem sempre considerar algum tipo de criptografia. No caso da transmissão de dados, TLS é o protocolo de comunicação criptográfica mais comum. Este protocolo é utilizado por diversas aplicações para a comunicação através da rede.
+											O principal benefício de se utilizar criptografia na camada de transporte é evitar o vazamento e modificação de informações através de acesso não autorizado quando há a comunicação entre o cliente e o servidor.
+											<br>
+											<br>
+											É também essencial ter preocupação com o tipo de dado que esta se armazenando. Uma das regras mais importantes é de se evitar ao máximo armazenar informações sensiveis. Se for necessário armazenar informações sensiveis o desenvolvedor deve se preocupar em criptografá-las para evitar a visualização não autorizada.
+										</div>
+										<h4>Armazenamento seguro em aplicações móveis</h4>
+										<div>
+											Aplicações móveis tem em particular uma preocupação a mais. Como estes tipos de dispositivos podem ser roubados ou perdidos com maior facilidade é recomendado manter a menor quantidade de dados disponiveis no dispositivo.
+										</div>
+										<h4>Ciclo de vida das chaves</h4>
+										<div>
+											Chaves (secret keys) são utilizadas em aplicações para diversas funções. Podem ser utilizadas, por exemplo, para assinar digitalmente JWTs, proteger cartões de crédito e gerenciar acesso a funcionalidades de segurança.
+											<ul>
+												<li>
+													Garanta que qualquer chave de acesso é protegida de acesso não permitido.
+												</li>
+												<li>
+													Armazene chaves em aplicações dedicadas a guardar essas chaves.(ex.: Vault da Hashcorp)
+												</li>
+												<li>
+													Utilize chaves independentes quando múltiplas chaves forem requeridas.
+												</li>
+												<li>
+													Garanta a atualização frequente de algoritmos de criptografia.
+												</li>
+						
+												<li>
+													Crie funcionalidades que saibam lidar com rotação de chave(key rotation)
+												</li>
+											</ul>
+										</div>
+										<h4>Aplicações de gerenciamento de chaves</h4>
+										<div>
+											Existem diversas aplicações que realizam o gerenciamento seguro de chaves. Essas aplicações podem gerenciar desde senhas para conexão SQL, a chaves SSH. Portanto é extremamente não recomendado armazenar chaves em arquivos config e "commita-los" em repositórios. Um bom exemplo de aplicação utilizada atualmente para esta finalidade é a Vault da Hashcorp.
+										</div>
+									</div>
+									<h2><u>C9: Monitore as atividades de segurança</u></h2>
+									<div>
+										<i>Logs</i> já são bastante utilizado por desenvolvedores para proposito de debug e diagnóstico.
+										Log com foco em segurança é basicamente a mesma ideia: logar informações relevantes para o monitoramento de segurança durante uma operação na aplicação.
+										O mais interessante é que as mesmas ferramentas utilizadas para diagnóstico e debug, podem ser utilizadas para um log focado em segurança e existem diversos benefícios em ter esta prática:
+										<ul>
+											<li>
+												Detecção de intrusão.
+											</li>
+											<li>
+												Análise e investigação de ataques.
+											</li>
+											<li>
+												Satisfazer requisitos de <i>compliance</i>.
+											</li>
+										</ul>
+										<h4>Implementação</h4>
+										<div>
+											Existem algumas recomendações para a implementação de logs focados na segurança. Alguns deles estão descritos abaixo.
+											<ul>
+												<li>
+													Defina um padrão de log através do sistema. Isso facilitiará a procura e a investigação de incidentes.
+												</li>
+												<li>
+													Nem muito, nem tampouco. Informações que podem ajudar nesses tipos de investigações é o timestamp e informações que identifiquem a origem da conexão, como IP e user ID. É importante ter cuidado em não logar informações privadas e/ou confidenciais.
+												</li>
+											</ul>
+										</div>
+										<h4>Log de movimentações suspeitas</h4>
+										<div>
+											É essencial para investigações de possiveis ataques detectar movimentações suspeitas. Algumas delas seriam:
+											<ul>
+												<li>
+													Executar uma chamada ao servidor não esperada.
+												</li>
+												<li>
+													Submeter uma chamada ao servidor executando uma modificação de um dado que não deve ser modificado.
+												</li>
+												<li>
+													Uma chamada que viola o acesso ao servidor.
+												</li>
+											</ul>
+						
+											Uma lista com mais movimentações podem ser encontradas <a href="https://cheatsheetseries.owasp.org/cheatsheets/Logging_Vocabulary_Cheat_Sheet.html">aqui</a>. 
+											<br>
+											Se sua aplicação detectar uma movimentação suspeita esta deve, no mínimo, marcar a atividade como uma tentativa de ataque através de uma ferramenta de monitoramento, como o Sentry. Idealmente a aplicação deve proativamente responder a tentativa, seja invalidando o acesso, seja rejeitando acesso ou executando um <i>lock</i> na conta do usuário.
+										</div>
+										<h4>Cuidados com o log</h4>
+										<div>
+											<ul>
+												<li>
+													Codifique e valide todos os caracteres para evitar <a href="https://owasp.org/www-community/attacks/Log_Injection">log injection</a>.
+												</li>
+												<li>
+													Não registre informação sensivel.(senhas, session ID, cartões de crédito, etc.)
+												</li>
+												<li>
+													Proteja a integridade dos logs. Dada a quantidade de informação que estes registro contém, atacantes irão sempre buscar informações lá.
+												</li>
+												<li>
+													Em casos de sistemas distribuidos crie um serviço seguro de logs de forma central. Isto garantirá que o dado não será perdido ou comprometido. Este método também permite um controle centralizado dos logs.
+												</li>
+											</ul>
+										</div>
+									</div>
+									<h2><u>C10: Capture todos erros e exceções</u></h2>
+									<div>
+										Capturar erros e exceções é critico para qualquer aplicação. É capturando os erros e exceções que, por exemplo, em exceções de banco a tabela não é exposta para o cliente.
+										Exceções ocorrem em todas as áreas da aplicação, incluindo áreas críticas da regra de negócio. Capturar exceções ajuda na análise de tentativas de ataques.
+										Pesquisas da <a href="https://www.usenix.org/system/files/conference/osdi14/osdi14-paper-yuan.pdf">Universidade de Toronto</a> chegaram a conclusão de que até o menor dos erros pode levar a falhas catastróficas em sistemas distriuidos.
+										A não implementação de captura de exceções pode levar as mais diversas vulnerabildiades. Entre elas estão:
+										<ul>
+											<li>
+												Vazamento de informações: retorno de informações que expoem como o sistema funciona.(ex.: Usuário não existe, expor colunas do banco, stack trace)
+											</li>
+											<li>
+												Denial of Service(DOS): Esta é uma tentativa de ataque comum em que um atacante tenta derrubar um servidor fazendo várias requisições, ao ponto que o servidor não consegue lidar com todas as elas. Isso leva a requisições válidas a serem rejeitadas. Uma boa tentativa de evitar este tipo de ataque é lançar HTTP 429 (Too Many Requests) o que rejeitará conexões apenas de atores especificos.
+											</li>
+											<li>
+												Evite espalhar try/catch através do código. Lide com as exceções de maneira centralizada. Essa prática ajuda na manutenção de código.
+											</li>
+											<li>
+												Garanta que as mensagens de exceção sejam genéricas e não exponham informações sensiveis. Ao mesmo tempo as exceções devem conter informações que ajudem os QAs e as equipes de suporte.
+											</li>
+										</ul>
+									</div>
+						
+									<h2><u>Conclusão</u></h2>
+						
+									Vimos neste documento apenas algumas sugestões e tópicos sobre esse pequeno subconjunto de contra-medidas à ataques. Este documento serve apenas como uma iniciação em como os desenvolvedores podem evitar ou mitigar ataques às suas aplicações.
+						
+									<br>
+									<br>
+						
+									@soareswallace
+						
+									<br>
+									<br>
+									<br>
+								</div>
+	</article>
+				<!-- Footer -->
+					<section id="footer">
+						<ul class="icons">
+							<li><a href="https://twitter.com/soareswallace" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						</ul>
+						<p class="copyright">&copy; Wallace Soares. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a href="http://unsplash.com">Unsplash</a>.</p>
+					</section>
 
-                <h3>Queries seguras</h3>
-                <div>
-                    Até hoje, com todos os avanços que tivemos nos <i>frameworks</i> modernos e mais utilizados pela indústria, existe sempre uma vulnerabilidade recorrente a cada ano nos OWASP Top 10: SQL Injection.
-                    SQL Injection é basicamente quando uma entrada não confiável e que não é tratada é executada na forma de uma query de banco. Esta vulnerabilidade é uma das mais perigosas para uma aplicação porque ela pode não somente apagar com todo o banco, como também expor informações sigilosas. Um atacante pode inclusive escalar essa vulnerabilidade e explorar a rede a qual o servidor pertence.
-                    Para prevenir este tipo de vulnerabilidade toda entrada deve ser tratada. Na verdade, em geral, toda entrada dada a um sistema deve ser tratada como insegura. Com isso em mente um desenvolvedor conseguirá prevenir uma outra série de vulnerabilidades, como por exemplo Cross-site Scripting.
-                    No caso de SQL Injection, ou SQLi, a melhor forma de fazer isso é através de parametrização de queries. Ou utilizar frameworks que já fazem isso por padrão, porém observando os pontos já discutidos em C2.
-                    <br>
-                    <br>
-                    No caso da utilização de parametrização, é importante lembrar que existem partes de queries que não são parametrizáveis. E estas localizações dependem de qual banco está sendo utilizado.
-                </div>
-                <h3>Configuração segura</h3>
-                <div>
-                    Infelizmente muitos bancos de dados não possuem uma configuração segura por padrão e, mais infelizmente ainda, alguns desenvolvedores não se preocupam em garantir que estas configurações sejam modificadas antes de coloca-lo em produção. É necessário que ao se utilizar um banco de dados o desenvolvedor tenha a preocupação de realizar as modificações necessárias para garantir um ambiente seguro para sua base de dados.
-                </div>
-                <h3>Autenticação e comunicação segura</h3>
-                <div>
-                    Seguindo na mesma linha sobre a configuração, quando se é feita a autenticação e a comunicação com a base de dados deve-se garantir que:
-                    <ul>
-                        <li>
-                            É feita através de um canal seguro e criptografado.
-                        </li>
-                        <li>
-                            Deve-se gerenciar bem as credencias em mantê-las em repositórios seguros criptografados e não às enviar junto ao código para um VCS(GitHub, GitLab).
-                        </li>
-                        <li>
-                            Não é recomendado utilizar a configuração padrão das bases visto que essa é a primeira forma de ataque que adversários podem tomar como foco.
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <h2><u>C4: Codifique e escape os seus dados</u></h2>
-            <div>
-                Codificar e escapar dados são técnicas que tem o objetivo de prevenir ataques de injeção(como o SQLi e XSS). Codificar é basicamente modificar o dado para uma nova representação que previna a realização de ataques de injeção. Um exemplo é modificar <code><</code> para <code>&amp;lt;</code> em HTML.
-                Escapar dados envolve adicionar um caracter especial antes de outro para evitar a ma interpretação. Um exemplo é a adição de uma contra barra(<code>\</code>) antes de aspas(<code>"</code>) para informar que este caracter deve ser interpretado como texto e não como fim de string.
-                Apesar de efetivo é praticamente impossível um desenvolvedor prevenir através de escape e codificação todos os tipos de ataques de injeção que existirem. A melhor opção é delegar, no geral, que os <i>frameworks</i> e bibliotecas lidem com esse tipo de validação e mantê-los sempre atualizados. Somente em caso de necessidade muito específica deve-se criar a própria regra de validação e que deve ser, futuramente, modificada para a utilização de biblioteca específica.
-                Além dos ataques mais comuns através de aplicações Web, como o SQLi e o XSS, existem outros tipos de ataque que envolvem LDAP, comandos de sistema operacional(OS Injection) e XML Injections. Todos esses podem ser evitados com codificação e escape, porém seguem a mesma regra de que é praticamente impossível cobrir todos os cenários de ataque.
-            </div>
-            <h2><u>C5: Valide todas as entradas</u></h2>
-            <div>
-                Como toda orientação sobre proteção contra ataques costuma dizer: NUNCA CONFIE NA ENTRADA DO USUÁRIO. Toda e qualquer entrada deve ser tratada como não confiável. A validação deve ser feito tanto na forma sintática, como na semântica.
-                A validação deve ser no sentido de que o dado que foi enviado é exatamente do tipo esperado(ex.: inteiro de 4 digitos) e esse dado ao ser passado entre as camadas deve ser válidado e parametrizado a cada passagem.
-                <h3>Lista de permissões</h3>
-                Uma prática comum de defesa contra estes tipos de ataques é da definição de entradas que seriam permitidas(<i>allowlist</i>) ou de forma análoga entradas que NÃO seriam permitidas(<i>blocklist</i>).
-                Entre estas duas, a medidas a mais recomendada para se iniciar uma proteção de sua aplicação é de se criar uma <i>allowlist</i> visto que o conjunto de entradas que se aceita é bem menor do que o conjunto que se proíbi. De forma simples, é mais difícil cobrir todos os casos em que um ataque é efetuado do que definir quais são as entradas válidas.
-                Mas é importante também o desenvolvedor ter em mente que esta deve ser uma das primeiras barreiras de proteção e que outras medidas devem ser impostas para se ter uma maior segurança na aplicação.
+			</div>
 
-                <h3>Sempre faça a validação no servidor</h3>
-                <div>
-                    Apesar de ajudar nos requisitos funcionais do negócio e permitir alguns controles de qual informação esta sendo passada ao servidor, a validação no lado do cliente não deve ser encorajada como unica forma de prevenção deste tipo de ataque. Se um desenvolvedor pretende proteger sua aplicação de adversários, é altamente recomendado que validações sejam feitas no servidor já que controles no lado do cliente podem ser facilmente ultrapassados.
-                    A prática ideal é, na verdade, aplicar a validação entre as todas as camadas, tanto na entrada do dado ao servidor quanto no retorno.
-                    <br>
-                    <br>
-                    <code>Frontend -> Controlador -> Serviço -> Banco -> Serviço -> Controlador -> Frontend</code>
-                </div>
-                <h3>Validação de entrada deve ser o primeiro passo</h3>
-                <div>
-                    Como qualquer medida de prevenção de ataques, a validação de entrada não é uma bala de prata. Ela, sozinha, não consegue prevenir ataques, apesar de (tentar) manter o que esta sendo passado ao servidor como uma entrada válida. Porém uma entrada válida ainda pode ser um ataque.
-                    Esta medida deve, idealmente, ser combinada com outras para aumentar a proteção do sistema.
-                </div>
-                <h3>Serialize aos poucos</h3>
-                <div>
-                    Com o crescente uso de JSON para comunicação entre APIs e o frontend muitas vezes a comunicação entre os dois se baseia em objetos enormes. E quanto maior forem esses objetos mais difícil torna-se a validação do dado.
-                    O desenvolvedor deve ter em mente que um conjunto menor de dados e um objeto mais conciso pode facilitar na hora de validar a informação passada.
-                </div>
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
 
-                <h2>BASICAMENTE: NUNCA CONFIE NO ENTRADA DO USUÁRIO</h2>
-            </div>
-
-            <h2><u>C6: Implemente sua identidade digital</u></h2>
-            <div>
-                A identidade digital é a maneira de se realizar o controle dos usuários que acessam a aplicação. Autenticação é, por exemplo, o processo de validar a identidade daquele que esta acessando o sistema. Controle de sessão a forma com que o servidor mantêm o estado de autenticação dos usuários. Veremos aqui algumas recomendações para uma implementação segura de controle de identidades.
-                <h3>Niveis de autenticação</h3>
-                <div>
-                    A <a href="https://pages.nist.gov/800-63-3/sp800-63b.html"> publicação especial NIST 800-63B</a> descreve um guia de como implementar controles para uma identidade digital, autenticação e gerenciamento de sessão. Nesta, são apresentados 3 níveis de garantias de autenticação, chamados de Authentication Assurance Level(AAL).
-                </div>
-
-                <h4>Nível 1</h4>
-                <div>
-                    O nível 1 é reservado para aplicações de baixo risco. Reservado para aquelas aplicações que não contém PII(Informação pessoal identificavel.)
-                    O nível 1 requer apenas autenticação de um único fator, tipicamente através do uso de senhas.
-
-                    <h4><u>L1: Requisitos para Senhas</u></h4>
-                    <div>
-                        Toda política de senha que sigam estes requisitos devem, no mínimo, possuir:
-                        <ul>
-                            <li>
-                                Um mínimo de 8 caracteres, se possível utilizar em conjunto com autenticação de multi-fatores(MFA). Caso MFA não possa ser aplicado, o tamanho minimo deve ser aumentado para 10 caracteres.
-                            </li>
-                            <li>
-                                Todo caracter ASCII, assim como o caractere de espaço em branco deve ser aceito como válido.
-                            </li>
-                            <li>
-                                Deve-se encorajar o uso de senhas longas.
-                            </li>
-                            <li>
-                                Remover estes requisitos pode diminuir bastante a efetividade da segurança. MFA e senhas longas deve ser sempre encorajado.
-                            </li>
-                            <li>
-                                Senhas que já foram encontradas em vazamentos de login devem ser rejeitadas. Um desenvolvedor podem restringir a busca dentre as top <a href="https://github.com/danielmiessler/SecLists/tree/master/Passwords">1000 senhas mais comuns em vazamentos.</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <h4><u>L1: Implementar um mecanismo seguro de recuperação de senha</u></h4>
-                    <div>
-                        É mais comum do que se imagina que atacantes ganhem acesso a contas de usuário através do mecanismo de senha. Um exemplo de ataque é através do corpo do POST.
-                        Ao se requisitar um reset de senha o cliente manda um POST ao servidor e no seu corpo contém o email do usuário.
-                        <br>
-                        <br>
-                        <code>
-                            email_to_recover:"victim@email.com"
-                        </code>
-
-                        <br>
-                        <br>
-                        Uma manipulação que pode ser feita neste corpo é verificar se o servidor aceita mais de um email como parâmetro válido. Por exemplo:
-                        <br>
-                        <br>
-                        <code>
-                            email_to_recover:["victim@email.com", "attacker@email.com"]
-                        </code>
-                        <br>
-                        <br>
-                        Por mais incrível que parece, este exemplo é um <a href="https://hackerone.com/reports/322985">caso real de ataque</a> em que o atacante conseguiu acesso a conta da vítima, pois ao fazer essa alteração o atacante recebeu no seu email o link de reset de senha.
-                        Um bom material de referência, sobre como garantir um procedimento seguro de reset de senha pode ser encontrado no <a href="https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html">forgot password cheat sheet.</a>
-                    </div>
-                    <h4><u>L1: Armazenar senhas de forma segura</u></h4>
-                    <div>
-                        Apesar das falhas graves dos anos recentes, ainda hoje existem aplicações que armazenam senhas em texto plano. Isso, obviamente, não é uma forma segura de armazaenamento. Já existem frameworks que fazem isso de forma automatica e é altamente recomendado que se aplique.
-                    </div>
-                </div>
-                <h4>Nível 2</h4>
-                <div>
-                    O nível 2 é reservado para aplicações que contém PII ou qualquer outra informação pessoal disponível de forma online. Neste nível é requerido o uso de OTP ou qualquer outro MFA disponível.
-                    MFA garante um outra camada de segurança e garante também que o usuário que esta tentando acessar o recurso é realmente aquele quem diz ser. MFA pode ser uma combinação de:
-                    <ul>
-                        <li>
-                            Algo que o usuário conhece: senhas ou PIN
-                        </li>
-                        <li>
-                            Algo que o usuário possue: token ou telefone
-                        </li>
-                        <li>
-                            Algo que faz parte do usuário: biometria
-                        </li>
-                    </ul>
-                    É importante ter em mente que biometria, por si só, não é um excelente fator de autenticação. Pode ser facilmente obtida de forma online(ex.: fotos de rosto) ou driblada. Biometria deve sempre ser usada como um segundo fator de autenticação nestes casos.
-                </div>
-                <h4>Nível 3</h4>
-                <div>
-                    O nível 3 é requerido quando o impacto de sistemas comprometidos pode gerar qualquer tipo de dano pessoal, perda financeira substancial, dano do interesse público ou envolver violações criminais ou civis. O nível 3 requer autenticação que é baseada em prova de posse através de algum tipo de protocolo de criptografia.
-                    Este controle é usado quando se quer atingir o maior grau de segurança possível. Isto é geralmente atingido através de modulos criptograficos de hardware.
-                </div>
-                <h3><u>Gerenciamento de sessão</u></h3>
-                <div>
-                    É utilizado para manter o estado de autenticação por um tempo limitado de tempo. Este mecanismo permite que o usuário não tenha que se re-autenticar a cada <i>request</i>.
-                    O controle deve ser feito através do servidor e deve conter um identificador para o usuário. A validade deste identificador deve ser limitada e deve expirar após um período de tempo pré-determinado.
-                    Abaixo há algumas sugestões que devem ser consideradas quando o gerenciamento é implementado:
-                    <ul>
-                        <li>
-                            Garanta que o <i>session id</i> possui uma quantidade grande de caracteres, que seja único e aleatório.
-                        </li>
-                        <li>
-                            A aplicação deve gerar um novo id a cada re-autenticação e expirar ids após um periodo de tempo pré-determinado, ou durante o <i>log-out</i>.
-                        </li>
-                    </ul>
-
-                    Para mais detalhes sobre quais padrões seguir o desenvolvedor pode encontrar em <a href="https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html">Session Management Cheat Sheet</a>
-                </div>
-                <h4>Cookies</h4>
-                <div>
-                    É o método mais comum de se armazenar os identificadores de sessão. Os cookies armazenam e gerenciam os identificadores de sessão para aplicações web.
-                    Há algumas boas práticas que devem ser seguidas ao se utilizar este metodo gerenciador de sessão.
-                    <ul>
-                        <li>
-                            Não devem ser aplicáveis a todos os caminhos disponiveis na aplicação. Seu acesso deve ser limitado a um sub-grupo.
-                        </li>
-                        <li>
-                            O parâmetro <i>secure</i> deve estar configurado para garantir uma transmissão segura(TLS).
-                        </li>
-                        <li>
-                            O parâmetro <code>HttpOnly</code> deve ser configurado para prevenir que o cookie seja acessado via JavaScript.
-                        </li>
-                        <li>
-                            A adição do parâmetro <i>samesite</i> deve ser feita para evitar Cross-site Requests e assim evitar ataques que explorem esta funcionalidade.
-                        </li>
-                    </ul>
-                </div>
-                <h4>Tokens</h4>
-                <div>
-                    São a forma mais moderna de gerenciar a sessão de usuários após uma autenticação inicial. Gerados no servidor, não necessitam de re-autenticação para manter o usuário logado. Apenas após o tempo de expiração. Assim, lidando com apenas o estado do token, o desempenho sentido pelo cliente também é melhorado visto que não se faz necessário armazenar toda a informação e validá-la para autenticar o usuário.
-                </div>
-                <h4>JWT (JSON Web Tokens)</h4>
-                <div>
-                    É um padrão aberto que define uma forma compacta e auto-contida de transmitir a informação entre o cliente e o servidor através de um objeto JSON. Esta informação é assinada digitalmente  e pode ser verificada no servidor.
-                    Entretanto, é importante ter em mente que o JWT, geralmente,  não é salvo no servidor. Ele é apenas gerado e enviado ao cliente que o reutiliza até o tempo de expiração. Após este tempo o servidor gera outro JWT válido que é novamente entregue ao cliente. A cada novo request o cliente "pergunta" ao servidor se a assinatura enviada com o JWT é válida. Em caso de negativa o servidor deve requisitar ao cliente uma nova autenticação para gerar um novo JWT válido.
-                </div>
-                <br>
-                <br>
-                Apesar de ser um dos maiores tópicos deste documento, apenas vimos de forma superficial. Há muito a ser explorado aqui e que estas técnicas apresentadas devem ser combinadas sempre com mais de uma camada de segurança.
-            </div>
-            <h2><u>C7: Garanta Controles de Acesso</u></h2>
-            <div>
-                Inicialmente é preciso diferenciar autenticação de autorização. Autenticação é o processo verificar a identidade do usuário e autentica-lo ao sistema. Conceder autorização é o processo de, uma vez autenticado, verificar se um dado usuário possui os privilégios de acesso ao recurso e/ou serviço.
-                Controle de acesso pode ser implementado através das mais diferentes áreas, desde controle de acesso a dados, até cache para propósitos de escalabilidade. Existem diversos tipos de design para controle de acesso que podem ser consideradas:
-                <ul>
-                    <li>
-                        Controle de acesso discricionario(DAC): é o controle de acesso implementado para arquivos, entidades, objetos, etc. Este controle é geralmente baseado em privilégios dos usuários e acesso a grupos específicos.
-                    </li>
-                    <li>
-                        Controle de acesso mandatório(MAC): é o controle de acesso baseado em níveis de sensibilidade de informação.
-                    </li>
-                    <li>
-                        Controle de acesso baseado em privilégios(RBAC): é realizar o controle de acesso baseado nos privilégios atribuídos aos usuários.(ex.: Admin, User, Editor)
-                    </li>
-                    <li>
-                        Controle de acesso baseado em atributo(ABAC): é o controle de acesso baseado em atributos dos objetos e arquivos e os atributos dados aos usuários. É feito uma validação cruzada entre os dois para conceder ou não o acesso.
-                    </li>
-                </ul>
-
-                <h3>Princípios de design para controle de acesso</h3>
-                <div>
-                    É apresentado neste documento um conjunto de práticas para design de controle de acesso que devem ser considerados durante a fase inicial de desenvolvimento.
-                    <h4>Pense no controle de acesso desde o início</h4>
-                    <div>
-                        Uma vez desenvolvido um sistema é extremamente custoso pensar e executar uma forma de controle de acesso partindo do mesmo. Quanto mais cedo se pensar neste controle menos trabalhoso será para manter um padrão de controle de acesso.
-                        Controle de acesso é uma das principais áreas que garante a segurança de uma aplicação e deve ser pensado desde as primeiras fases de design.
-                        Inicialmente design para controle de acesso pode ser simples, mas aumenta junto com a complexidade da aplicação. É necessário (também) permitir uma customização do controle de acesso para cada funcionalidade da aplicação. Entretanto esta customização não deve comprometer a segurança da aplicação.
-                    </div>
-
-                    <h4>Force que todos os requests passem por checagem de acesso</h4>
-                    <div>
-                        É recomendado que exista no caminho de entrada dos <i>requests</i> um controle de acesso centralizado. Um módulo que valide os privilégios dos usuários a cada requisição. Esse requisito garantirá que ao realizar qualquer tipo de ação no sistema um usuário terá verificado todos os seus privilégios, evitando assim ações indesejadas.
-                    </div>
-                    <h3>Negue por padrão</h3>
-                    <div>
-                        Se não é especificamente permitido, negue a requisição. Existem várias formas de aplicar este principio em código.
-                        <ul>
-                            <li>
-                                A aplicação pode lançar uma exceção ou um erro enquanto processa a checagem de privilégios. Nestes casos o acesso deve sempre ser negado.
-                            </li>
-                            <li>
-                                Quando um usuário é criado, este mesmo usuário deve possuir o mínimo de privilégios possível até que alguém lhe conceda algum.
-                            </li>
-                            <li>
-                                Quando uma nova funcionalidade é configurada, esta deve ser negado o acesso a usuários comuns até que esteja totalmente disponivel.
-                            </li>
-                        </ul>
-                    </div>
-                    <h3>Princípio do menor privilégio</h3>
-                    <div>
-                        Garanta que todo e qualquer acesso dado a qualquer usuário seja o mínimo necessário para a execução das suas atividades.
-                    </div>
-                    <h3>Não codifique de forma explicita privilégios</h3>
-                    <div>
-                        Muitas aplicações fazem o controle de acesso baseado em cargos e acaba se tornando bastante comum a seguinte linha de código.
-                        <br>
-                        <br>
-                        <code>
-                            if (user.hasRole("ADMIN")) || (user.hasRole("MANAGER")) {
-                        </code>
-                        <br>
-                        <br>
-                        Este tipo de codificação tem suas limitações e perigos:
-                        <ul>
-                            <li>
-                                É naturalmente frágil e pode facilmente gerar erros de verificação em casos que o desenvolvedor esquece de adicionar novos cargos.
-                            </li>
-                            <li>
-                                A sua manutenabilidade é extremamente complicada em ambientes compartilhados.
-                            </li>
-                            <li>
-                                Não permite controle de acesso horizontal ou controle específico baseado em dados.
-                            </li>
-                        </ul>
-
-                        Um bom substituo para esta linha de código pode ser sugestão abaixo com o uso de <i>voters</i>:
-                        <br>
-                        <br>
-                        <code>
-                            if (user.hasAccess("DELETE_ACCOUNT")) {
-                        </code>
-                    </div>
-                    <h3>Log todos os eventos que envolvem controle de acesso</h3>
-                    <div>
-                        Todos os eventos que envolvem a checagem de privilégios devem ser logados na aplicação para auxiliar em futuras investigações de ataques e vulnerabilidades.
-                    </div>
-                </div>
-            </div>
-            <h2><u>C8: Proteja seus dados</u></h2>
-            <div>
-                Não apenas garantido pelas novas leis de proteção de dados(LGDP, GDPR), o dever de um desenvolvedor de proteger os dados dos seus usuários deve ser intríseco.
-                Atacantes podem roubar dados de usuários de diversas formas, algumas delas são a comunicação não segura e SQL Injection para copia de senhas e outras credenciais.
-
-                <h4>1ª Etapa: Classifique seus dados</h4>
-                <div>
-                    É essencial para os desenvolvedores de sistemas classificar os dados e determinar o grau de sensibilidade de cada um.
-                    Assim que se categoriza esses dados o desenvolvedor de sistemas pode agora mapear as regras necessárias para proteger cada tipo de dado em cada nível de sensibilidade. Por exemplo:
-                    <ul>
-                        <li>
-                            Informação de marketing que não é sensível pode ser categorizada como pública e seria ok colocá-la em um site púsblico.
-                        </li>
-                        <li>
-                            Número de cartão de crédito pode ser classificado como informação privada e deve ser criptografada.
-                        </li>
-                    </ul>
-                </div>
-                <h4>Criptografe dados sensiveis</h4>
-                <div>
-                    Ao trafegar e armazenar dados os desenvolvedores de sistemas devem sempre considerar algum tipo de criptografia. No caso da transmissão de dados, TLS é o protocolo de comunicação criptográfica mais comum. Este protocolo é utilizado por diversas aplicações para a comunicação através da rede.
-                    O principal benefício de se utilizar criptografia na camada de transporte é evitar o vazamento e modificação de informações através de acesso não autorizado quando há a comunicação entre o cliente e o servidor.
-                    <br>
-                    <br>
-                    É também essencial ter preocupação com o tipo de dado que esta se armazenando. Uma das regras mais importantes é de se evitar ao máximo armazenar informações sensiveis. Se for necessário armazenar informações sensiveis o desenvolvedor deve se preocupar em criptografá-las para evitar a visualização não autorizada.
-                </div>
-                <h4>Armazenamento seguro em aplicações móveis</h4>
-                <div>
-                    Aplicações móveis tem em particular uma preocupação a mais. Como estes tipos de dispositivos podem ser roubados ou perdidos com maior facilidade é recomendado manter a menor quantidade de dados disponiveis no dispositivo.
-                </div>
-                <h4>Ciclo de vida das chaves</h4>
-                <div>
-                    Chaves (secret keys) são utilizadas em aplicações para diversas funções. Podem ser utilizadas, por exemplo, para assinar digitalmente JWTs, proteger cartões de crédito e gerenciar acesso a funcionalidades de segurança.
-                    <ul>
-                        <li>
-                            Garanta que qualquer chave de acesso é protegida de acesso não permitido.
-                        </li>
-                        <li>
-                            Armazene chaves em aplicações dedicadas a guardar essas chaves.(ex.: Vault da Hashcorp)
-                        </li>
-                        <li>
-                            Utilize chaves independentes quando múltiplas chaves forem requeridas.
-                        </li>
-                        <li>
-                            Garanta a atualização frequente de algoritmos de criptografia.
-                        </li>
-
-                        <li>
-                            Crie funcionalidades que saibam lidar com rotação de chave(key rotation)
-                        </li>
-                    </ul>
-                </div>
-                <h4>Aplicações de gerenciamento de chaves</h4>
-                <div>
-                    Existem diversas aplicações que realizam o gerenciamento seguro de chaves. Essas aplicações podem gerenciar desde senhas para conexão SQL, a chaves SSH. Portanto é extremamente não recomendado armazenar chaves em arquivos config e "commita-los" em repositórios. Um bom exemplo de aplicação utilizada atualmente para esta finalidade é a Vault da Hashcorp.
-                </div>
-            </div>
-            <h2><u>C9: Monitore as atividades de segurança</u></h2>
-            <div>
-                <i>Logs</i> já são bastante utilizado por desenvolvedores para proposito de debug e diagnóstico.
-                Log com foco em segurança é basicamente a mesma ideia: logar informações relevantes para o monitoramento de segurança durante uma operação na aplicação.
-                O mais interessante é que as mesmas ferramentas utilizadas para diagnóstico e debug, podem ser utilizadas para um log focado em segurança e existem diversos benefícios em ter esta prática:
-                <ul>
-                    <li>
-                        Detecção de intrusão.
-                    </li>
-                    <li>
-                        Análise e investigação de ataques.
-                    </li>
-                    <li>
-                        Satisfazer requisitos de <i>compliance</i>.
-                    </li>
-                </ul>
-                <h4>Implementação</h4>
-                <div>
-                    Existem algumas recomendações para a implementação de logs focados na segurança. Alguns deles estão descritos abaixo.
-                    <ul>
-                        <li>
-                            Defina um padrão de log através do sistema. Isso facilitiará a procura e a investigação de incidentes.
-                        </li>
-                        <li>
-                            Nem muito, nem tampouco. Informações que podem ajudar nesses tipos de investigações é o timestamp e informações que identifiquem a origem da conexão, como IP e user ID. É importante ter cuidado em não logar informações privadas e/ou confidenciais.
-                        </li>
-                    </ul>
-                </div>
-                <h4>Log de movimentações suspeitas</h4>
-                <div>
-                    É essencial para investigações de possiveis ataques detectar movimentações suspeitas. Algumas delas seriam:
-                    <ul>
-                        <li>
-                            Executar uma chamada ao servidor não esperada.
-                        </li>
-                        <li>
-                            Submeter uma chamada ao servidor executando uma modificação de um dado que não deve ser modificado.
-                        </li>
-                        <li>
-                            Uma chamada que viola o acesso ao servidor.
-                        </li>
-                    </ul>
-
-                    Uma lista com mais movimentações podem ser encontradas <a href="https://cheatsheetseries.owasp.org/cheatsheets/Logging_Vocabulary_Cheat_Sheet.html">aqui</a>. 
-                    <br>
-                    Se sua aplicação detectar uma movimentação suspeita esta deve, no mínimo, marcar a atividade como uma tentativa de ataque através de uma ferramenta de monitoramento, como o Sentry. Idealmente a aplicação deve proativamente responder a tentativa, seja invalidando o acesso, seja rejeitando acesso ou executando um <i>lock</i> na conta do usuário.
-                </div>
-                <h4>Cuidados com o log</h4>
-                <div>
-                    <ul>
-                        <li>
-                            Codifique e valide todos os caracteres para evitar <a href="https://owasp.org/www-community/attacks/Log_Injection">log injection</a>.
-                        </li>
-                        <li>
-                            Não registre informação sensivel.(senhas, session ID, cartões de crédito, etc.)
-                        </li>
-                        <li>
-                            Proteja a integridade dos logs. Dada a quantidade de informação que estes registro contém, atacantes irão sempre buscar informações lá.
-                        </li>
-                        <li>
-                            Em casos de sistemas distribuidos crie um serviço seguro de logs de forma central. Isto garantirá que o dado não será perdido ou comprometido. Este método também permite um controle centralizado dos logs.
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <h2><u>C10: Capture todos erros e exceções</u></h2>
-            <div>
-                Capturar erros e exceções é critico para qualquer aplicação. É capturando os erros e exceções que, por exemplo, em exceções de banco a tabela não é exposta para o cliente.
-                Exceções ocorrem em todas as áreas da aplicação, incluindo áreas críticas da regra de negócio. Capturar exceções ajuda na análise de tentativas de ataques.
-                Pesquisas da <a href="https://www.usenix.org/system/files/conference/osdi14/osdi14-paper-yuan.pdf">Universidade de Toronto</a> chegaram a conclusão de que até o menor dos erros pode levar a falhas catastróficas em sistemas distriuidos.
-                A não implementação de captura de exceções pode levar as mais diversas vulnerabildiades. Entre elas estão:
-                <ul>
-                    <li>
-                        Vazamento de informações: retorno de informações que expoem como o sistema funciona.(ex.: Usuário não existe, expor colunas do banco, stack trace)
-                    </li>
-                    <li>
-                        Denial of Service(DOS): Esta é uma tentativa de ataque comum em que um atacante tenta derrubar um servidor fazendo várias requisições, ao ponto que o servidor não consegue lidar com todas as elas. Isso leva a requisições válidas a serem rejeitadas. Uma boa tentativa de evitar este tipo de ataque é lançar HTTP 429 (Too Many Requests) o que rejeitará conexões apenas de atores especificos.
-                    </li>
-                    <li>
-                        Evite espalhar try/catch através do código. Lide com as exceções de maneira centralizada. Essa prática ajuda na manutenção de código.
-                    </li>
-                    <li>
-                        Garanta que as mensagens de exceção sejam genéricas e não exponham informações sensiveis. Ao mesmo tempo as exceções devem conter informações que ajudem os QAs e as equipes de suporte.
-                    </li>
-                </ul>
-            </div>
-
-            <h2><u>Conclusão</u></h2>
-
-            Vimos neste documento apenas algumas sugestões e tópicos sobre esse pequeno subconjunto de contra-medidas à ataques. Este documento serve apenas como uma iniciação em como os desenvolvedores podem evitar ou mitigar ataques às suas aplicações.
-
-            <br>
-            <br>
-
-            @soareswallace
-
-            <br>
-            <br>
-            <br>
-		</div>
-		<br>
-        <br>
 	</body>
 </html>

@@ -1,35 +1,49 @@
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
-	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-	<meta content="utf-8" http-equiv="encoding">
-	<style>
-		body {
-			max-width: 50em;
-			margin: 0 auto;
-			color: white;
-			background: black;
-		}
-		pre {
-			white-space: pre-wrap;
-		}
-		@media only screen and (max-width:768px) {
-			body {
-				max-width:100%;
-			}
-		}
-		a:link {
-			color: #0a0 ;
-		}
-		a:visited {
-			color: #004100 ;
-		}
-	</style>
-	<title>Formas de ataque em autenticação, autorização e gerenciamento de sessão</title>
-	 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<body>
-		<h1>Formas de ataque em autenticação, autorização e gerenciamento de sessão</h1>
-		<hr>
-		<div>
-			Processos de autenticação, autorização, controle de acesso e  sessão surgem para fazer o gerenciamento dos usuários as mais diversas funções de sistemas. Entretanto existem alguns problemas que surgem a partir de implementação e suposições que acontecem durante o processo de desenvolvimento. Neste documento iremos apresentar tanto as formas de ataque como possíveis formas de prevenção.
+	<head>
+		<title>Formas de ataque em autenticação, autorização e gerenciamento de sessão</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+	</head>
+	<body class="single is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="../index.html">Wallace Soares</a></h1>
+						<nav class="links">
+							<ul>
+								<li><a href="../articles/index.html">Artigos</a></li>
+								<li><a href="../pensamentos/index.html">Pensamentos</a></li>
+								<li><a href="../sec/index.html">Sec</a></li>
+							</ul>
+						</nav>
+					</header>
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2><a href="#">Formas de ataque em autenticação, autorização e gerenciamento de sessão</a></h2>
+									</div>
+									<div class="meta">
+										<time class="published" datetime="2022-01-09">January 09, 2022</time>
+										<a href="#" class="author"><span class="name">Wallace Soares</span><img src="../images/avatar.jpg" alt="" /></a>
+									</div>
+								</header>
+								<span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
+								<div>
+									Processos de autenticação, autorização, controle de acesso e  sessão surgem para fazer o gerenciamento dos usuários as mais diversas funções de sistemas. Entretanto existem alguns problemas que surgem a partir de implementação e suposições que acontecem durante o processo de desenvolvimento. Neste documento iremos apresentar tanto as formas de ataque como possíveis formas de prevenção.
 
 			<h2><u>Ataques força-bruta</u></h2>
 			Ataques força-bruta são um dos tipos de ataque mais simples que existem para ganhar acesso privilégiado. Consistem em basicamente realizar várias tentativas de login com credenciais que tem potencial de acesso ao sistema. Em caso de as credenciais estarem corretas o atacante conseguirá acessar a conta do usuário. Pelo fato de existirem múltiplas formas de se implementar autenticação de credenciais é possível que cada sistema possua uma ou mais vulnerabilidades relacionadas. Algumas delas estão descritas abaixo.
@@ -360,5 +374,24 @@
 
 		<br>
 		<br>
+								</div>
+	</article>
+				<!-- Footer -->
+					<section id="footer">
+						<ul class="icons">
+							<li><a href="https://twitter.com/soareswallace" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						</ul>
+						<p class="copyright">&copy; Wallace Soares. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a href="http://unsplash.com">Unsplash</a>.</p>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
 	</body>
 </html>
